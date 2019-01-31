@@ -4,46 +4,36 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        bgColor: [cc.SpriteFrame],
-        blueChessPiecesArr: [cc.SpriteFrame],
-        redChessPiecesArr: [cc.SpriteFrame]
+        bgColor: [cc.SpriteFrame], //棋子红蓝背景
+        blueChessPiecesArr: [cc.SpriteFrame], //红方棋子
+        redChessPiecesArr: [cc.SpriteFrame] //蓝色棋子
     },
 
     onLoad () {
         this.chessNode = this.node.getChildByName('chessNode');
         this.yanwuNode = this.node.getChildByName('yanwu');
         this.backImgNode = this.node.getChildByName('backImg');
+
+        //方向节点
         this.leftNode = this.node.getChildByName('left');
         this.rightNode = this.node.getChildByName('right');
         this.upNode = this.node.getChildByName('up');
         this.downNode = this.node.getChildByName('down');
-        // clientEvent.on(clientEvent.eventType.openChessPiece, function (tag) {
-        //     if (this.node.tag !== tag) return;
-        //     this.openChessPiece();
-        // }.bind(this))
-        clientEvent.on(clientEvent.eventType.openChessPiece, this.openChessPieceEvent, this);
+
         this.leftNode.active = false;
         this.rightNode.active = false;
         this.upNode.active = false;
         this.downNode.active = false;
+
         this.yanwuNode.active = false;
         this.isOpen = false;
         this.isMoving = false;
+
+        clientEvent.on(clientEvent.eventType.openChessPiece, this.openChessPieceEvent, this);
     },
 
     setChessType:function (type,index) {
        this.chessPieceNode = this.node.getChildByName('chessNode').getChildByName('chessPiece');
-        // if (index % 10 === 8) {
-        //     this.chessPieceNode.x += 10;
-        //     this.chessPieceNode.y += 20;
-        // } else if (index % 10 === 7) {
-        //     this.chessPieceNode.x -= 5;
-        //     this.chessPieceNode.y += 20;
-        // } else if (index % 10 === 6) {
-        //     this.chessPieceNode.y += 12;
-        // } else if (index % 10 === 5) {
-        //     this.chessPieceNode.y += 15;
-        // }
         if(type === GLB.PLAYER_FLAG.BLUE)
         {
             this.chessPieceNode.setScale(1);
@@ -59,33 +49,24 @@ cc.Class({
         this.index = index - 1;
     },
 
+    //翻开棋子消息
     openChessPieceEvent (tag) {
         if (this.node.tag !== tag) return;
         this.openChessPiece();
     },
 
+    //翻开棋子
     openChessPiece:function () {
-        //  播放音乐
+        // 播放音乐
         user.setAudio(this.index % 10);
         user.stepIfEatOrOpen(2);
+        //播放翻开棋子动画播放完毕之后展开云朵和棋子然后播放云朵动画
         this.backImgNode.getComponent(cc.Animation).play("openAnm").on("finished",function() {
             this.backImgNode.active = false;
             this.chessNode.active = true;
             this.yanwuNode.active = true;
             this.yanwuNode.getComponent(cc.Animation).play("yanwu");
         }.bind(this));
-
-        // TODO 第一次翻棋
-        // if (user.fristFilpChess === 1) {//第一次翻棋
-        //     if (this.index <= 10) {
-        //         user.isBlue = true;
-        //     } else {
-        //         user.isBlue = false;
-        //     }
-        //     user.fristFilpChess = 0;
-        //     clientEvent.dispatchEvent("changeColor", user.isBlue);
-        //     user.sendGameData(user.gameDataProto.firstFlipChess, {isBlue:user.isBlue});
-        // }
 
         setTimeout(function() {
             clientEvent.dispatch("isGameOver");
@@ -123,10 +104,6 @@ cc.Class({
     },
 
     clearDirection:function() {
-        // this.leftNode = this.node.getChildByName('left');
-        // this.rightNode = this.node.getChildByName('right');
-        // this.upNode = this.node.getChildByName('up');
-        // this.downNode = this.node.getChildByName('down');
         this.leftNode.active = false;
         this.rightNode.active = false;
         this.upNode.active = false;
@@ -136,10 +113,6 @@ cc.Class({
 
     setMoveDirection:function (data, cb) {
         this.pickUp = this.chessNode.getComponent(cc.Animation).play("pickUp");
-        // this.leftNode = this.node.getChildByName('left');
-        // this.rightNode = this.node.getChildByName('right');
-        // this.upNode = this.node.getChildByName('up');
-        // this.downNode = this.node.getChildByName('down');
         this.node.setLocalZOrder(100);
         if(data.left)
         {
@@ -147,11 +120,9 @@ cc.Class({
             if(data.largeThanleft)
             {
                 this.leftNode.color = new cc.color("#FFFFFF");
-                // this.widget["left"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(canDownUrl));
             }
             else{
                 this.leftNode.color = new cc.color("#FF4E4E");
-                // this.widget["left"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(notDownUrl));
             }
         }
         if(data.right)
@@ -160,11 +131,9 @@ cc.Class({
             if(data.largeThanright)
             {
                 this.rightNode.color = new cc.color("#FFFFFF");
-                // this.widget["right"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(canDownUrl));
             }
             else{
                 this.rightNode.color = new cc.color("#FF4E4E");
-                // this.widget["right"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(notDownUrl));
             }
         }
         if(data.up)
@@ -173,11 +142,9 @@ cc.Class({
             if(data.largeThanup)
             {
                 this.upNode.color = new cc.color("#FFFFFF");
-                // this.widget["up"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(canDownUrl));
             }
             else{
                 this.upNode.color = new cc.color("#FF4E4E");
-                // this.widget["up"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(notDownUrl));
             }
         }
         if(data.down)
@@ -186,11 +153,9 @@ cc.Class({
             if(data.largeThandown)
             {
                 this.downNode.color = new cc.color("#FFFFFF");
-                // this.widget["down"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(canDownUrl));
             }
             else{
                 this.downNode.color = new cc.color("#FF4E4E");
-                // this.widget["down"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(notDownUrl));
             }
         }
         if (cb) {
@@ -236,6 +201,4 @@ cc.Class({
     onDestroy () {
         clientEvent.off(clientEvent.eventType.openChessPiece, this.openChessPieceEvent, this);
     }
-
-    // update (dt) {},
 });

@@ -121,6 +121,7 @@ cc.Class({
         this.refreshStartBtn();
     },
 
+    //数显按钮先是如果人数不够是不能开启游戏的
     refreshStartBtn() {
         var spNode = this.nodeDict["startGame"];
         var btn = this.nodeDict["startGame"].getComponent(cc.Button);
@@ -137,6 +138,7 @@ cc.Class({
         mvs.engine.leaveRoom("");
     },
 
+    //放松进入房间的消息协议
     startGame: function() {
         if (!GLB.isRoomOwner) {
             uiFunc.openUI("uiTip", function(obj) {

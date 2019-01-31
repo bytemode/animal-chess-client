@@ -25,6 +25,8 @@ cc.Class({
         this.nodeDict["exit"].on("click", this.exit, this);
         this.nodeDict["name"].getComponent(cc.Label).string = GLB.userInfo.id;
         this.nodeDict["rank"].on("click", this.rank, this);
+
+        clientEvent.on(clientEvent.eventType.createRoomResponse, this.createRoomResponse, this);
     },
 
     initUI:function(){
@@ -98,7 +100,21 @@ cc.Class({
 
     //创建房间
     createRoom: function() {
-        uiFunc.openUI("uiCreateRoomVer");
+        //uiFunc.openUI("uiCreateRoomVer");
+        Game.GameManager.blockInput();
+
+        var create = new mvs.CreateRoomInfo();
+        create.roomName = "test";
+        GLB.MAX_PLAYER_COUNT = 2;
+        create.maxPlayer = GLB.MAX_PLAYER_COUNT;
+        create.mode = 0;
+        create.canWatch = 0;
+        create.visibility = 1;
+        create.roomProperty = GLB.MAX_PLAYER_COUNT;
+        var result = mvs.engine.createRoom(create, { maxPlayer: GLB.MAX_PLAYER_COUNT });
+        if (result !== 0) {
+            console.log('创建房间失败,错误码:' + result);
+        }
     },
 
     //加入房间
@@ -111,5 +127,28 @@ cc.Class({
         if(window.wx) {
             wx.shareAppMessage({imageUrl: "https://data.tianziyou.com/matchvsGamesRes/logo/animalCheckerLogo1.png"});
         }
+    },
+    
+    createRoomResponse: function(data) {
+        var status = data.rsp.status;
+        if (status !== 200) {
+            console.log('创建房间失败,异步回调错误码: ' + status);
+        } else {
+            console.log('创建房间成功:' + JSON.stringify(data.rsp));
+            console.log('房间号: ' + data.rsp.roomID);
+            GLB.roomId = data.rsp.roomID;
+
+            uiFunc.openUI("uiRoomVer", function(obj) {
+                var room = obj.getComponent('uiRoom');
+                room.createRoomInit(data.rsp);
+                uiFunc.closeUI(this.node.name);
+                this.node.destroy();
+            }.bind(this));
+        }
+    },
+
+    onDestroy: function() {
+        clientEvent.off(clientEvent.eventType.createRoomResponse, this.createRoomResponse, this);
     }
+
 });

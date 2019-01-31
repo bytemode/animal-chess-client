@@ -33,20 +33,26 @@ cc.Class({
         this.timeNumNode = this.timeNode.getChildByName('num');
         this.timeNumLabel = this.timeNumNode.getComponent(cc.Label);
         this.timeAnim = this.timeNumNode.getComponent(cc.Animation);
+
+        //readygo动画之后开始游戏
         this.readyAnim = this.readyNode.getComponent(cc.Animation);
         this.readyAnim.on('finished', this.gameStart, this);
+        
         this.selfIcon = this.node.getChildByName('headImg').getChildByName('leftImgMask').getChildByName('leftImg');
         this.rivalIcon = this.node.getChildByName('headImg').getChildByName('rightImgMask').getChildByName('rightImg');
+        this.readyGoAudio = this.readyNode.getComponent(cc.AudioSource);
+
+        //初始化事件监听
         clientEvent.on(clientEvent.eventType.updateTime, this.updateTime, this);
         clientEvent.on(clientEvent.eventType.countTime, this.countTime, this);
         clientEvent.on(clientEvent.eventType.changeFlag, this.changeFlag, this);
         clientEvent.on(clientEvent.eventType.roundStart, this.roundStart, this);
         clientEvent.on(clientEvent.eventType.gameOver, this.gameOver, this);
         clientEvent.on(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
-        this.readyGoAudio = this.readyNode.getComponent(cc.AudioSource);
     },
 
     setPicture () {
+        //红蓝双方的圆形图像框
          var redFlagUrl = cc.url.raw("resources/picture/animal/" + "redHead" + ".png");
          this.redFlag = new cc.SpriteFrame(redFlagUrl);
          var blueFlagUrl = cc.url.raw("resources/picture/animal/" + "blueHead" + ".png");
@@ -76,11 +82,17 @@ cc.Class({
         console.log('------roundStart------')
         this.timeLabelInit();
         clearInterval(this.interval);
+
         this.playerFlag = GLB.PLAYER_FLAG.RED;
         // this.getTurn(this.playerFlag);
+
         user.init();
+        //设置红蓝双方头像
         this.headColorInit();
+
+        //获取地图
         clientEvent.dispatch(clientEvent.eventType.getMap);
+
         this.playReadyGo();
         this.setTimeNumFont();
         this.setHeadIcon();
@@ -107,7 +119,6 @@ cc.Class({
     },
 
     gameStart () {
-
         // this.timeLabelInit();
         Game.GameManager.gameState = GameState.Play;
         this.countTime();

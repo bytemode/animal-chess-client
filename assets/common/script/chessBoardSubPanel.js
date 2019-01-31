@@ -9,23 +9,15 @@ cc.Class({
         nextStep: cc.Prefab
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
+        //缓存棋子
         pool.createPrefabPool(this.chess);
         pool.createPrefabPool(this.nextStep);
-        //
-        // this.showChessArr = [];//存棋子
-        // this.showStepArr = [];
-        // this.chessBoardList = [
-        //     [0, 0, 0, 0],
-        //     [0, 0, 0, 0],
-        //     [0, 0, 0, 0],
-        //     [0, 0, 0, 0]
-        // ];
+ 
         this.init();
-        this.fPosList = [];
-
+        
+        
+        //记录棋牌的宽高和行列
         this.chessBoradWidth = this.node.width;
         this.chessBoradHeight = this.node.height;
         this.rows = 4;
@@ -35,10 +27,12 @@ cc.Class({
 
 
         //初始化格子坐标
+        this.fPosList = [];
+
         for(var x = 0;x <this.rows; x++){
             var areaLine = [];
             for(var y = 0; y < this.columns; y++){
-               // var pos = cc.p(-this.chessBoradWidth/2 + y*this.longX + this.longX/2, this.chessBoradHeight/2 - x*this.longY - this.longY/2);
+                //注意锚点从左往右从上往下的排列方式
                 var pos = cc.p(-this.chessBoradWidth/2 + y*this.longX + this.longX/2, this.chessBoradHeight/2 - x*this.longY - this.longY/2 + 5);
                 areaLine[y] = pos;
             }
@@ -51,6 +45,7 @@ cc.Class({
         this.mapParam01 = null;
         this.mapParam02 = null;
 
+        //初始化事件
         clientEvent.on(clientEvent.eventType.mapInit, this.mapInitEvent, this);
         clientEvent.on(clientEvent.eventType.eatForChess, this.eatForChessEvent, this)
         clientEvent.on(clientEvent.eventType.eatForOther, this.eatForOther, this);
@@ -61,12 +56,10 @@ cc.Class({
         clientEvent.on(clientEvent.eventType.getMap, this.getMap, this);
         clientEvent.on(clientEvent.eventType.gameOver, this.overClear, this);
         clientEvent.on(clientEvent.eventType.clearChess, this.overClear, this);
-        // this.node.on('touchend', this.touchBoardEvent, this);
-        //this.getMap();
     },
 
     init () {
-        this.showChessArr = [];//存棋子
+        this.showChessArr = []; //存棋子
         this.showStepArr = [];
         this.chessBoardList = [
             [0, 0, 0, 0],
@@ -98,8 +91,8 @@ cc.Class({
     touchBoardEvent (event) {
         if (Game.GameManager.gameState !== GameState.Play) return;
         var pos = this.node.convertToNodeSpace(event.getLocation());
-        var clickPos = {x: pos.y/this.longY,
-            y:pos.x/this.longX};
+        var clickPos = {x: pos.y/this.longY, y:pos.x/this.longX};
+        
         if (clickPos.y%1 < 0.25 || clickPos.y%1 >0.7 || clickPos.x%1 < 0.25 || clickPos.x%1 >0.7 ) {
             console.log("在界外");
             // if (this.oldChessNode) {
@@ -173,21 +166,25 @@ cc.Class({
         console.log('*******这里是mapInit*********');
         if(GLB.isRoomOwner) return;
         this.showChessArr = [];
-        this.showStepArr = []
+        this.showSStepArr = []
+
         var showChessInfo = data["showChessInfo"];
         this.chessBoardList = data.chessBoardList;
         for(var j = 0;j < showChessInfo.length; j++){
             var chessNode = pool.getPrefab(this.chess.name);
             this.node.addChild(chessNode);
+
             chessNode.setPosition(showChessInfo[j].pos);
             chessNode.tag = showChessInfo[j].tag;
-            var chessScript = chessNode.getComponent(this.chess.name);
             this.showChessArr.push(chessNode);
+
+            var chessScript = chessNode.getComponent(this.chess.name);
             chessScript.setChessType(showChessInfo[j].type, showChessInfo[j].index);
 
             var stepNode = pool.getPrefab(this.nextStep.name);
             var stepScrip = stepNode.getComponent(this.nextStep.name);
             this.node.addChild(stepNode);
+
             stepScrip.setChessType(showChessInfo[j].type, showChessInfo[j].index);
             stepNode.setPosition(showChessInfo[j].pos);
             stepNode.tag = showChessInfo[j].tag;
@@ -215,6 +212,7 @@ cc.Class({
                 var chessNode = pool.getPrefab(this.chess.name);
                 this.node.addChild(chessNode);
                 chessNode.setPosition(this.fPosList[j][k]);
+
                 chessNode.tag = j*this.columns + k;
                 var chessScript = chessNode.getComponent(this.chess.name);
                 this.showChessArr.push(chessNode);
@@ -784,7 +782,7 @@ cc.Class({
     },
 
     onDestroy () {
-        console.log('******chessBoardPanelOndestroy******');
+        console.log('onDestroy');
         clientEvent.off(clientEvent.eventType.mapInit, this.mapInitEvent, this);
         clientEvent.off(clientEvent.eventType.eatForChess, this.eatForChessEvent, this)
         clientEvent.off(clientEvent.eventType.eatForOther, this.eatForOther, this);
@@ -795,11 +793,5 @@ cc.Class({
         clientEvent.off(clientEvent.eventType.getMap, this.getMap, this);
         clientEvent.off(clientEvent.eventType.gameOver, this.overClear, this);
         clientEvent.off(clientEvent.eventType.clearChess, this.overClear, this);
-        // this.node.off('touchend', this.touchBoardEvent, this);
     }
-    // start () {
-    //
-    // },
-
-    // update (dt) {},
 });

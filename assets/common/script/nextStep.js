@@ -7,8 +7,6 @@ cc.Class({
 
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         this.isOpen = false;
         this.isMoving = false;
@@ -124,6 +122,4 @@ cc.Class({
         console.log('*****nextStepOndestroy*****')
        // this.node.off('touchend', this.touchEvent, this);
     }
-
-    // update (dt) {},
 });
