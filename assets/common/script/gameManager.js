@@ -97,8 +97,7 @@ cc.Class({
         mvs.response.networkStateNotify = this.networkStateNotify.bind(this);
 
         // var result = mvs.engine.init(mvs.response, GLB.channel, GLB.platform, GLB.gameId);
-        var result = mvs.engine.init(mvs.response, GLB.channel, GLB.platform, GLB.gameId,
-            GLB.appKey, GLB.gameVersion);
+        var result = mvs.engine.init(mvs.response, GLB.channel, GLB.platform, GLB.gameId, GLB.appKey, GLB.gameVersion);
         if (result !== 0) {
             console.log('初始化失败,错误码:' + result);
         }
@@ -309,12 +308,7 @@ cc.Class({
 
     lobbyShow: function() {
         this.gameState = GameState.None;
-        // cc.director.loadScene('lobby')
-        if (cc.Canvas.instance.designResolution.height > cc.Canvas.instance.designResolution.width) {
-            uiFunc.openUI("uiLobbyPanelVer");
-        } else {
-            uiFunc.openUI("uiLobbyPanel");
-        }
+        uiFunc.openUI("uiLobbyPanel");
     },
 
     // 收到的消息

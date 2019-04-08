@@ -7,11 +7,11 @@ cc.Class({
     properties: {
         loseClip: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         victoryClip: {
             default: null,
-            url: cc.AudioClip
+            type: cc.AudioClip
         },
         redFrame: cc.SpriteFrame,
         blueFrame: cc.SpriteFrame,
