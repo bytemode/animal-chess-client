@@ -4,7 +4,6 @@ var GLB = require("Glb");
 cc.Class({
     extends: cc.Component,
     blockInput() {
-        //拦截所属节点 bounding box 内的所有输入事件
         Game.GameManager.getComponent(cc.BlockInputEvents).enabled = true;
         setTimeout(function() {
             Game.GameManager.node.getComponent(cc.BlockInputEvents).enabled = false;
@@ -12,22 +11,36 @@ cc.Class({
     },
     onLoad() {
         Game.GameManager = this;
-        cc.game.addPersistRootNode(this.node); //常驻节点
-        cc.view.enableAutoFullScreen(false); //关掉自动全屏
-
-        dataFunc.loadConfigs(); //加载一些配置
-        
-        //事件系统初始化
+        cc.game.addPersistRootNode(this.node);
         clientEvent.init();
+        dataFunc.loadConfigs();
+        cc.view.enableAutoFullScreen(false);
         clientEvent.on(clientEvent.eventType.gameOver, this.gameOver, this);
         clientEvent.on(clientEvent.eventType.leaveRoomNotify, this.leaveRoom, this);
-
-        //初始化网路层
         this.network = window.network;
         this.network.chooseNetworkMode();
-
         this.getRankDataListener();
         this.findPlayerByAccountListener();
+
+        // if(window.wx) {
+        //     wx.login({
+        //         success: function() {
+        //             wx.getUserInfo({
+        //                 fail: function(res) {
+        //                     // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
+        //                     if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1) {
+        //                         // 处理用户拒绝授权的情况
+        //                     }
+        //                 },
+        //                 success: function(res) {
+        //                     Game.GameManager.nickName = res.userInfo.nickName;
+        //                     Game.GameManager.avatarUrl = res.userInfo.avatarUrl;
+        //                     console.log('success', Game.GameManager.nickName);
+        //                 }
+        //             });
+        //         }
+        //     });
+        // }
     },
 
     leaveRoom: function(data) {
@@ -35,6 +48,12 @@ cc.Class({
         if (this.gameState === GameState.Play) {
             if (GLB.userInfo.id !== data.leaveRoomInfo.userId) {
                 GLB.isRoomOwner = true;
+                // var gamePanel = uiFunc.findUI("uiGamePanel");
+                // if (gamePanel) {
+                //     var gamePanelScript = gamePanel.getComponent("uiGamePanel");
+                //     gamePanelScript.otherScore = 0;
+                //     this.gameOver();
+                // }
             }
             else {
                 Game.GameManager.gameState = GameState.Over;
@@ -58,7 +77,7 @@ cc.Class({
     },
 
     matchVsInit: function() {
-        mvs.response.initResponse = this.initResponse.bind(this); //.bind(this)改变函数的this返回新的对象
+        mvs.response.initResponse = this.initResponse.bind(this);
         mvs.response.errorResponse = this.errorResponse.bind(this);
         mvs.response.joinRoomResponse = this.joinRoomResponse.bind(this);
         mvs.response.joinRoomNotify = this.joinRoomNotify.bind(this);
@@ -77,7 +96,9 @@ cc.Class({
         mvs.response.sendEventNotify = this.sendEventNotify.bind(this);
         mvs.response.networkStateNotify = this.networkStateNotify.bind(this);
 
-        var result = mvs.engine.init(mvs.response, GLB.channel, GLB.platform, GLB.gameId);
+        // var result = mvs.engine.init(mvs.response, GLB.channel, GLB.platform, GLB.gameId);
+        var result = mvs.engine.init(mvs.response, GLB.channel, GLB.platform, GLB.gameId,
+            GLB.appKey, GLB.gameVersion);
         if (result !== 0) {
             console.log('初始化失败,错误码:' + result);
         }
@@ -265,12 +286,13 @@ cc.Class({
 
         console.log('开始登录,用户Id:' + userInfo.id)
 
-        var result = mvs.engine.login(
+        /* var result = mvs.engine.login(
             userInfo.id, userInfo.token,
             GLB.gameId, GLB.gameVersion,
             GLB.appKey, GLB.secret,
             deviceId, gatewayId
-        );
+        ); */
+        var result = mvs.engine.login(userInfo.id, userInfo.token, deviceId);
         if (result !== 0) {
             console.log('登录失败,错误码:' + result);
         }
@@ -285,10 +307,14 @@ cc.Class({
         }
     },
 
-    //进入大厅
     lobbyShow: function() {
         this.gameState = GameState.None;
-        uiFunc.openUI("uiLobbyPanelVer");
+        // cc.director.loadScene('lobby')
+        if (cc.Canvas.instance.designResolution.height > cc.Canvas.instance.designResolution.width) {
+            uiFunc.openUI("uiLobbyPanelVer");
+        } else {
+            uiFunc.openUI("uiLobbyPanel");
+        }
     },
 
     // 收到的消息
@@ -366,7 +392,7 @@ cc.Class({
         }
         if (info.cpProto.indexOf(GLB.OPEN_FOR_OTHER) >= 0) {
             if(info.srcUserId == GLB.userInfo.id) return;
-            var tag = JSON.parse(info.cpProto).tag;
+            var tag = JSON.parse(info.cpProto).sign;
             clientEvent.dispatch(clientEvent.eventType.openForOther, tag);
         }
         if (info.cpProto.indexOf(GLB.EAT_FOR_OTHER) >= 0) {

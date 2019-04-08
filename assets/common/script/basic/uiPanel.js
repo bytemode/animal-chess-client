@@ -37,7 +37,7 @@ cc.Class({
                 }
             }
         }.bind(this);
-        linkWidget(this.node, this.nodeDict); //key_开头的节点放在nodeDict中
+        linkWidget(this.node, this.nodeDict);
 
         // 添加动画--
         if (!this.showAnimation || !this.hideAnimation) {

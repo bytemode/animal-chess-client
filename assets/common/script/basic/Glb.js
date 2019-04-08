@@ -1,28 +1,17 @@
 var obj = {
     RANDOM_MATCH: 1,  // 随机匹配
     PROPERTY_MATCH: 2,  // 属性匹配
-
-    MAX_PLAYER_COUNT: 2, //最大玩家数量
-
-    COOPERATION: 1,  //匹配
-    COMPETITION: 2,  //比赛
-
-    gameType: 2,     //比赛模式
-    matchType: 1,    //随机匹配
-
+    MAX_PLAYER_COUNT: 2,
     PLAYER_COUNTS: [2],
-    
+    COOPERATION: 1,
+    COMPETITION: 2,
     GAME_START_EVENT: "gameStart",
     GAME_TIME: "gameTime",
     GAME_OVER_EVENT: "gameOver",
     ROUND_START: "roundStart",
     READY: "ready",
-
     channel: 'MatchVS',
     platform: 'alpha',
-    gameId: 201554,
-    gameVersion: 1,
-
     IP: "wxrank.matchvs.com",
     PORT: "3010",
 
@@ -36,10 +25,14 @@ var obj = {
       SELF: 1,
     },
 
+    gameId: 201554,
+    gameVersion: 1,
     // GAME_NAME: 'game8',
     appKey: 'd4e29d00bd3a48e2acf4f6e7a5ffe270',
     secret: 'f0f7bd601d9f43db840091ac08a17002',
 
+    gameType: 2,
+    matchType: 1,
     tagsInfo: { "title": "A" },
     userInfo: null,
     playerUserIds: [],

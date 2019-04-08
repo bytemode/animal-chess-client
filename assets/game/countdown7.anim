@@ -11,6 +11,16 @@
     "paths": {
       "guang": {
         "props": {
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1,
+              "value": 360
+            }
+          ],
           "scaleX": [
             {
               "frame": 0,
@@ -37,16 +47,6 @@
             {
               "frame": 1,
               "value": 1
-            }
-          ],
-          "angle": [
-            {
-              "frame": 0,
-              "value": 0
-            },
-            {
-              "frame": 1,
-              "value": -360
             }
           ]
         }

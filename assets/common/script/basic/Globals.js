@@ -1,5 +1,3 @@
-//表示浏览器中打开的窗口,可以用来定义全局变量
-
 window.Game = {
     GameManager: null,
     BulletManager: null,

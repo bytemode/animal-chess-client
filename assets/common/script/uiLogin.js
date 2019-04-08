@@ -44,7 +44,6 @@ cc.Class({
                 }
             });
         } else {
-            //.node.on('click', ...)  方法 + target
             this.nodeDict["start"].on("click", Game.GameManager.matchVsInit, Game.GameManager);
         }
     },

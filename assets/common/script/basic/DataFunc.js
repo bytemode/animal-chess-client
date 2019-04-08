@@ -80,13 +80,13 @@ dataFunc.queryAll = function(tableName, key, value) {
 
 dataFunc.loadConfigs = function(progressCb, callback) {
 
-    // 加载动画 cc.loader.loadResDir加载相同路径下的多个cc.AnimationClip资源
+    // 加载动画
     cc.loader.loadResDir("panelAnimClips", cc.AnimationClip, function(err, clips) {
         if (err) {
             cc.error(err.message || err);
             return;
         }
-        for (var i = 0; i < clips.length; i++) { //将clip安装名字保存
+        for (var i = 0; i < clips.length; i++) {
             dataFunc.uiPanelAnimationClips[clips[i].name] = clips[i];
         }
     });

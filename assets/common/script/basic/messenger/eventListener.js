@@ -1,5 +1,3 @@
-//eventListener 为全局变量 1对多的时间注册机制
-
 window.eventListener = {};
 
 var oneToMultiListener = {};
@@ -36,7 +34,7 @@ oneToMultiListener.dispatch = function(eventName, data) {
         if (handler) {
             try {
                 if (target) {
-                    handler.call(target, data); //call为function的方法,可以用来调用函数.可以用来实现集成和改变this,第一个为this之后为调用参数
+                    handler.call(target, data);
                 } else {
                     handler(data);
                 }
@@ -57,7 +55,7 @@ oneToMultiListener.off = function(eventName, handler, target) {
         var oldHandler = handlerList[i].handler;
         var oldTarget = handlerList[i].target;
         if (oldHandler === handler && oldTarget === target) {
-            handlerList.splice(i, 1); //从数组handlerList的i处删除1个元素
+            handlerList.splice(i, 1);
             break;
         }
     }
@@ -75,7 +73,7 @@ oneToMultiListener.clear = function(target) {
 };
 
 eventListener.create = function() {
-    var newEventListener = Object.create(oneToMultiListener); //es5中创建对象的方法 oneToMultiListener充当继承的原型
+    var newEventListener = Object.create(oneToMultiListener);
     newEventListener.handlers = {};
     return newEventListener;
 };

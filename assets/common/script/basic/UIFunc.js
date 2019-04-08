@@ -33,15 +33,14 @@ uiFunc.openUI = function(uiName, callBack) {
         }
     }
     // 非缓存--
-    //专门加载那些位于 resources 目录下的 单个Asset， 不用扩展名
     cc.loader.loadRes('ui/' + uiName, function(err, prefab) {
         if (err) {
             cc.error(err.message || err);
             return;
         }
 
-        var temp = cc.instantiate(prefab); //clone节点或者预制体
-        temp.parent = cc.Canvas.instance.node; //当前激活的画布组件激活的节点 作为父节点
+        var temp = cc.instantiate(prefab);
+        temp.parent = cc.Canvas.instance.node;
         uiFunc.uiList.push(temp)
 
         var panel = temp.getComponent("uiPanel");
