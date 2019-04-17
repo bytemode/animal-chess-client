@@ -1,5 +1,6 @@
 var mvs = require("Matchvs");
 var GLB = require("Glb");
+require("nano")
 
 cc.Class({
     extends: cc.Component,
@@ -503,5 +504,24 @@ cc.Class({
     onDestroy() {
         clientEvent.off(clientEvent.eventType.gameOver, this.gameOver, this);
         clientEvent.off(clientEvent.eventType.leaveRoomNotify, this.leaveRoom, this);
+    },
+
+    nanoInit: function(){
+        nano.init({
+            host: "127.0.0.1",
+            port: 3325,
+            path: '/nano',
+            handshakeCallback : function(){}
+        }, function() {
+            console.log('success');
+
+            nano.request("gate.Login", {"name":"sunfeng", "uid":1234, "headUrl":"test", "sex":1}, function(data){
+                console.log(data);
+        
+                nano.request("game.CreateDesk", {"version":"1.9.3", "options":{"mode":1}}, function(data){
+                    console.log(data);
+                });
+            });
+        });
     }
 });

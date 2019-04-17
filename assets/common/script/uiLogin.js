@@ -44,7 +44,7 @@ cc.Class({
                 }
             });
         } else {
-            this.nodeDict["start"].on("click", Game.GameManager.matchVsInit, Game.GameManager);
+            this.nodeDict["start"].on("click", Game.GameManager.nanoInit, Game.GameManager);
         }
     },
 

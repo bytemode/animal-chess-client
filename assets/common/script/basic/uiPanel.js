@@ -18,7 +18,7 @@ cc.Class({
     },
 
     onLoad: function() {
-        // node load --
+        // 查找以key_开头的控件放在nodeDict中
         this.nodeDict = {};
 
         var linkWidget = function(self, nodeDict) {
