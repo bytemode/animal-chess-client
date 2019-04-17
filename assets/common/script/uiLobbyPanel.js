@@ -128,19 +128,11 @@ cc.Class({
     },
 
     createRoom: function() {
-        if (cc.Canvas.instance.designResolution.height > cc.Canvas.instance.designResolution.width) {
-            uiFunc.openUI("uiCreateRoomVer");
-        } else {
-            uiFunc.openUI("uiCreateRoom");
-        }
+        uiFunc.openUI("uiCreateRoomVer");
     },
 
     joinRoom: function() {
-        if (cc.Canvas.instance.designResolution.height > cc.Canvas.instance.designResolution.width) {
-            uiFunc.openUI("uiRoomListVer");
-        } else {
-            uiFunc.openUI("uiRoomList");
-        }
+        uiFunc.openUI("uiRoomListVer");
     },
 
     inviteFriend: function() {

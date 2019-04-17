@@ -1,7 +1,12 @@
 var uiPanel = require("uiPanel");
 cc.Class({
     extends: uiPanel,
-    properties: {},
+    properties: {
+        uidEditbox: {
+            type: cc.EditBox,
+            default: null,
+        },
+    },
 
     onLoad() {
         this._super();
@@ -44,7 +49,10 @@ cc.Class({
                 }
             });
         } else {
-            this.nodeDict["start"].on("click", Game.GameManager.nanoInit, Game.GameManager);
+            this.nodeDict["start"].on("click", function(){
+                console.log(this.uidEditbox)
+                Game.GameManager.nanoInit(this.uidEditbox.string)
+            }.bind(this), Game.GameManager);
         }
     },
 

@@ -68,6 +68,7 @@ cc.Class({
     createRoom: function() {
         Game.GameManager.blockInput();
 
+        /*
         var create = new mvs.CreateRoomInfo();
         create.roomName = this.nodeDict["roomName"].getComponent(cc.EditBox).string;
         GLB.MAX_PLAYER_COUNT = this.playerCnt;
@@ -80,6 +81,11 @@ cc.Class({
         if (result !== 0) {
             console.log('创建房间失败,错误码:' + result);
         }
+        */
+
+        nano.request("game.CreateDesk", {"version":"1.9.3", "options":{"mode":1}}, function(data){
+            console.log(data)
+        }.bind(this))
     },
 
     createRoomResponse: function(data) {

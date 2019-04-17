@@ -506,7 +506,7 @@ cc.Class({
         clientEvent.off(clientEvent.eventType.leaveRoomNotify, this.leaveRoom, this);
     },
 
-    nanoInit: function(){
+    nanoInit: function(uid){
         nano.init({
             host: "127.0.0.1",
             port: 3325,
@@ -515,13 +515,13 @@ cc.Class({
         }, function() {
             console.log('success');
 
-            nano.request("gate.Login", {"name":"sunfeng", "uid":1234, "headUrl":"test", "sex":1}, function(data){
-                console.log(data);
-        
-                nano.request("game.CreateDesk", {"version":"1.9.3", "options":{"mode":1}}, function(data){
-                    console.log(data);
-                });
-            });
-        });
+            nano.request("gate.Login", {"name":"test"+uid, "uid":Number(uid), "headUrl":"test", "sex":1}, function(data){
+                console.log(data)
+                GLB.userInfo = data
+                GLB.userInfo.id = data.uid
+                Game.GameManager.nickName = data.nickname
+                this.lobbyShow()
+            }.bind(this))
+        }.bind(this));
     }
 });
