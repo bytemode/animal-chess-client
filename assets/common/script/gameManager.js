@@ -307,11 +307,6 @@ cc.Class({
         }
     },
 
-    lobbyShow: function() {
-        this.gameState = GameState.None;
-        uiFunc.openUI("uiLobbyPanel");
-    },
-
     // 收到的消息
     sendEventNotify: function(info) {
         console.log(info)
@@ -506,6 +501,8 @@ cc.Class({
         clientEvent.off(clientEvent.eventType.leaveRoomNotify, this.leaveRoom, this);
     },
 
+    //nano init and login
+
     nanoInit: function(uid){
         nano.init({
             host: "127.0.0.1",
@@ -515,7 +512,7 @@ cc.Class({
         }, function() {
             console.log('success');
 
-            nano.request("gate.Login", {"name":"test"+uid, "uid":Number(uid), "headUrl":"test", "sex":1}, function(data){
+            nano.request("gate.Login", {"name":"test" + uid, "uid":Number(uid), "headUrl":"test", "sex":1}, function(data){
                 console.log(data)
                 GLB.userInfo = data
                 GLB.userInfo.id = data.uid
@@ -523,5 +520,11 @@ cc.Class({
                 this.lobbyShow()
             }.bind(this))
         }.bind(this));
-    }
+    },
+
+    //显示大厅界面
+    lobbyShow: function() {
+        this.gameState = GameState.None;
+        uiFunc.openUI("uiLobbyPanel");
+    },
 });
