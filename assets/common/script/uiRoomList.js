@@ -12,95 +12,19 @@ cc.Class({
         this.roomPrefab.active = false;
         this.nodeDict["search"].on("click", this.search, this);
         this.nodeDict["quit"].on("click", this.quit, this);
-
-
-        this.rooms = [];
-
-        clientEvent.on(clientEvent.eventType.getRoomListResponse, this.getRoomListResponse, this);
-        clientEvent.on(clientEvent.eventType.joinRoomResponse, this.joinRoomResponse, this);
-        clientEvent.on(clientEvent.eventType.getRoomListExResponse, this.getRoomListExResponse, this);
-
-        this.getRoomList();
-        this.roomRqId = setInterval(function() {
-            if (this.editBox.string === '') {
-                this.getRoomList();
-            }
-        }.bind(this), 5000);
-    },
-
-    getRoomList: function() {
-        var filter = {
-            maxPlayer: 0,
-            mode: 0,
-            canWatch: 0,
-            roomProperty: "",
-            full: 2,
-            state: 1,
-            sort: 1,
-            order: 0,
-            pageNo: 0,
-            pageSize: 20
-        }
-        mvs.engine.getRoomListEx(filter);
-    },
-
-    getRoomListResponse: function(data) {
-        for (var j = 0; j < this.rooms.length; j++) {
-            this.rooms[j].destroy();
-        }
-        this.rooms = [];
-        data.roomInfos.sort(function(a, b) {
-            return a.roomID - b.roomID;
-        });
-        for (var i = 0; i < data.roomInfos.length; i++) {
-            var room = cc.instantiate(this.roomPrefab);
-            room.active = true;
-            room.parent = this.roomPrefab.parent;
-            var roomScript = room.getComponent('roomInfo');
-            roomScript.setData(data.roomInfos[i]);
-
-            this.rooms.push(room);
-        }
-    },
-
-    getRoomListExResponse: function(data) {
-        for (var j = 0; j < this.rooms.length; j++) {
-            this.rooms[j].destroy();
-        }
-        this.rooms = [];
-        this.roomAttrs = data.rsp.roomAttrs;
-        for (var i = 0; i < data.rsp.roomAttrs.length; i++) {
-            var room = cc.instantiate(this.roomPrefab);
-            room.active = true;
-            room.parent = this.roomPrefab.parent;
-            var roomScript = room.getComponent('roomInfo');
-            roomScript.setData(data.rsp.roomAttrs[i]);
-
-            this.rooms.push(room);
-        }
     },
 
     quit: function() {
-        clearInterval(this.roomRqId);
         uiFunc.closeUI(this.node.name);
         this.node.destroy();
     },
 
+    //搜索加入房间
     search: function() {
         if (this.editBox.string === '') {
-            for (var i = 0; i < this.rooms.length; i++) {
-                this.rooms[i].active = true;
-            }
-        } else {
-            for (var j = 0; j < this.rooms.length; j++) {
-                var roomScript = this.rooms[j].getComponent('roomInfo');
-                if (roomScript.roomIdLb.string == this.editBox.string) {
-                    this.rooms[j].active = true;
-                } else {
-                    this.rooms[j].active = false;
-                }
-            }
+            return
         }
+        nano.request("game.Join", {"version":"1.9.3", "options":{"mode":1}}, this.createRoomRsp.bind(this))
     },
 
     joinRoomResponse: function(data) {
@@ -149,9 +73,5 @@ cc.Class({
             wx.offKeyboardInput();
             wx.hideKeyboard();
         }
-        clearInterval(this.roomRqId);
-        clientEvent.off(clientEvent.eventType.getRoomListResponse, this.getRoomListResponse, this);
-        clientEvent.off(clientEvent.eventType.joinRoomResponse, this.joinRoomResponse, this);
-        clientEvent.off(clientEvent.eventType.getRoomListExResponse, this.getRoomListExResponse, this);
     }
 });

@@ -129,7 +129,7 @@ cc.Class({
 
     //创建房间
     createRoom: function() {
-        nano.request("game.CreateDesk", {"version":"1.9.3", "options":{"mode":1}}, self.createRoomRsp.bind(this))
+        nano.request("game.CreateDesk", {"version":"1.9.3", "options":{"mode":1}}, this.createRoomRsp.bind(this))
     },
     
     createRoomRsp: function(data) {
@@ -138,7 +138,7 @@ cc.Class({
             console.log("desk id:", data.tableInfo.deskId)
 
             //打开房间界面
-            GLB.roomId = data.rsp.roomID;
+            GLB.roomId = data.tableInfo.deskId;
             uiFunc.openUI("uiRoomVer", function(obj) {
                 var room = obj.getComponent('uiRoom');
                 room.createRoomInit({"roomID":data.tableInfo.deskId, "owner": data.tableInfo.creator});
@@ -147,6 +147,7 @@ cc.Class({
         }
     },
 
+    //加入房间
     joinRoom: function() {
         uiFunc.openUI("uiRoomListVer");
     },

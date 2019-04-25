@@ -16,7 +16,6 @@ cc.Class({
         this.nodeDict["quit"].on("click", this.quit, this);
         this.nodeDict["startGame"].on("click", this.startGame, this);
 
-        clientEvent.on(clientEvent.eventType.joinRoomNotify, this.joinRoomNotify, this);
         clientEvent.on(clientEvent.eventType.leaveRoomNotify, this.leaveRoomNotify, this);
 
         for (var i = 0; i < GLB.MAX_PLAYER_COUNT; i++) {
@@ -29,7 +28,7 @@ cc.Class({
         }
 
         //加入房间的通知
-        nano.on("onPlayerEnter", self.joinRoomNotify.bind(this))
+        nano.on("onPlayerEnter", this.joinRoomNotify.bind(this))
     },
 
     leaveRoomNotify: function(data) {
@@ -61,11 +60,12 @@ cc.Class({
         this.ownerId = rsp.owner;
         this.players[0].setData(this.ownerId, this.ownerId);
         GLB.isRoomOwner = true;
+        this.nodeDict["roomID"].string = this.roomId
     },
 
     //离开房间
     quit: function() {
-        nano.request("game.Exit", {"isDestroy": true}, self.exitRoomRsp.bind(this))
+        nano.request("game.Exit", {"isDestroy": true}, this.exitRoomRsp.bind(this))
     },
 
     //离开房间返回
@@ -86,6 +86,7 @@ cc.Class({
 
     //加入房间的通知
     joinRoomNotify: function(data) {
+        console.log(data)
         for (var j = 0; j < data.data.length; j++) {
             this.players[j].userId = data.data[j].acId
             this.players[j].setData(data.data[j].acId, this.ownerId);

@@ -512,10 +512,10 @@ cc.Class({
         }, function() {
             console.log('success');
 
-            nano.request("gate.Login", {"name":"test" + uid, "uid":Number(uid), "headUrl":"test", "sex":1}, function(data){
+            nano.request("gate.Login", {"name":"test" + uid, "uid": Number(uid), "headUrl": "test", "sex":1}, function(data){
                 console.log(data)
                 GLB.userInfo = data
-                GLB.userInfo.id = data.uid
+                GLB.userInfo.id = data.acId
                 Game.GameManager.nickName = data.nickname
                 this.lobbyShow()
             }.bind(this))
