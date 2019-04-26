@@ -63,6 +63,15 @@ cc.Class({
 
         //发牌消息
         nano.on("onDuanPai", this.startGame.bind(this))
+
+        //提示玩家出牌
+        nano.on("onHintPlayer", this.onHintPlayer.bind(this))
+
+        //翻牌
+        nano.on("onOpenPiece", this.onOpenPiece.bind(this))
+
+        //牌局结束
+        nano.on("onGameEnd", this.onGameEnd.bind(this))
     },
 
     //显示大厅界面
@@ -73,13 +82,60 @@ cc.Class({
 
     //开始游戏发牌
     startGame: function(data) {
-        clientEvent.dispatch(clientEvent.eventType.onDuanPai, data);
+        //clientEvent.dispatch(clientEvent.eventType.onDuanPai, data);
         console.log('-----startGame-----')
         cc.director.loadScene('game', function() {
             uiFunc.openUI("uiGamePanel", function(panel) {
                 panel.getComponent("uiGamePanel").timeLabelInit();
-                this.sendReadyMsg();
+                //理牌结束
+                nano.notify("game.QiPaiFinished", {}) 
             }.bind(this));
         }.bind(this));
     },
+
+    //提示玩家出牌
+    onHintPlayer:function(data) {
+        console.log('-----onHintPlayer-----')
+        clientEvent.dispatch(clientEvent.eventType.onHintPlayer, data);
+    },
+
+    //翻牌
+    onOpenPiece: function(data) {
+        console.log('-----onOpenPiece-----')
+        if(GLB.userInfo.id == data.uid) { //过滤掉自己的操作
+            return
+        }
+        clientEvent.dispatch(clientEvent.eventType.onOpenPiece, data);
+    },
+
+    //移动
+    onMovePiece: function(data) {
+        console.log('-----onMovePiece-----')
+        if(GLB.userInfo.id == data.uid) { //过滤掉自己的操作
+            return
+        }
+        clientEvent.dispatch(clientEvent.eventType.onMovePiece, data);
+    },
+
+    //吃牌
+    onEatPiece: function(data) {
+        console.log('-----onEatPiece-----')
+        if(GLB.userInfo.id == data.uid) { //过滤掉自己的操作
+            return
+        }
+        clientEvent.dispatch(clientEvent.eventType.onEatPiece, data);
+    },
+
+    //聊天表情
+    onShowEnjoy: function(data) {
+        console.log('-----onShowEnjoy-----')
+        clientEvent.dispatch(clientEvent.eventType.onShowEnjoy, data);
+    },
+
+    //结算
+    onGameEnd:function(data) {
+        console.log('-----onGameEnd-----')
+        clientEvent.dispatch(clientEvent.eventType.onGameEnd, data);
+    }
+    
 });

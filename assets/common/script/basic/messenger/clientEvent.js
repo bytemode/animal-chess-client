@@ -39,7 +39,13 @@ window.clientEvent = {
         clearChess: "clearChess",
 
         //-------------------------------------------
-        onDuanPai: "onDuanPai", //发牌
+        onDuanPai: "onDuanPai",       //发牌
+        onHintPlayer: "onHintPlayer", //提示出牌
+        onOpenPiece:"onOpenPiece",
+        onMovePiece: "onMovePiece",
+        onEatPiece: "onEatPiece",
+        onShowEnjoy: "onShowEnjoy", //聊天表情
+        onGameEnd: "onGameEnd",
     },
     eventListener: null
 }
