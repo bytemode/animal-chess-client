@@ -37,6 +37,9 @@ window.clientEvent = {
         getMap: "getMap",
         stopTimeWarnAnim: "stopTimeWarnAnim",
         clearChess: "clearChess",
+
+        //-------------------------------------------
+        onDuanPai: "onDuanPai", //发牌
     },
     eventListener: null
 }

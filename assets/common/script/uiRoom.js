@@ -3,20 +3,22 @@ var mvs = require("Matchvs");
 var GLB = require("Glb");
 cc.Class({
     extends: uiPanel,
-    properties: {},
+    properties: {
+        txtRoomID: {
+            default: null,
+            type: cc.Label
+        },
+    },
 
     onLoad() {
         this._super();
         this.players = [];
         this.roomId = 0;
-        this.roomInfo = null;
         this.owner = 0;
         this.playerPrefab = this.nodeDict["player"];
         this.playerPrefab.active = false;
         this.nodeDict["quit"].on("click", this.quit, this);
         this.nodeDict["startGame"].on("click", this.startGame, this);
-
-        clientEvent.on(clientEvent.eventType.leaveRoomNotify, this.leaveRoomNotify, this);
 
         for (var i = 0; i < GLB.MAX_PLAYER_COUNT; i++) {
             var temp = cc.instantiate(this.playerPrefab);
@@ -29,38 +31,30 @@ cc.Class({
 
         //加入房间的通知
         nano.on("onPlayerEnter", this.joinRoomNotify.bind(this))
-    },
 
-    leaveRoomNotify: function(data) {
-        for (var j = 0; j < this.players.length; j++) {
-            if (this.players[j].userId === data.leaveRoomInfo.userId) {
-                this.players[j].init();
-                break;
-            }
-        }
-        this.ownerId = data.leaveRoomInfo.owner;
-        if (this.ownerId === GLB.userInfo.id) {
-            GLB.isRoomOwner = true;
-        }
-        for (var i = 0; i < this.players.length; i++) {
-            if (this.players[i].userId !== 0) {
-                this.players[i].setData(this.players[i].userId, this.ownerId);
-            }
-        }
-        this.refreshStartBtn();
+        clientEvent.on(clientEvent.eventType.onDuanPai, this.onDuanPai, this);
     },
 
     onDestroy() {
+        clientEvent.off(clientEvent.eventType.onDuanPai, this.onDuanPai, this);
     },
 
-    //-------------------------------------------------------------------------------------------
     //创建房间返回初始换房间基本信息
-    createRoomInit(rsp) {
-        this.roomId = rsp.roomID;
-        this.ownerId = rsp.owner;
+    createRoomInit: function(data) {
+        this.roomId = data.roomID;
+        this.ownerId = data.owner;
         this.players[0].setData(this.ownerId, this.ownerId);
         GLB.isRoomOwner = true;
-        this.nodeDict["roomID"].string = this.roomId
+        this.txtRoomID.string = this.roomId
+    },
+
+    joinRoomInit: function(data){
+        this.roomId = data.roomID;
+        this.ownerId = data.owner;
+        this.players[0].setData(this.ownerId, this.ownerId);
+        GLB.isRoomOwner = false;
+        this.txtRoomID.string = this.roomId
+        this.players[1].setData(GLB.userInfo.id, this.ownerId);
     },
 
     //离开房间
@@ -92,4 +86,9 @@ cc.Class({
             this.players[j].setData(data.data[j].acId, this.ownerId);
         }
     },
+
+    onDuanPai: function(data){
+        uiFunc.closeUI(this.node.name);
+        this.node.destroy();
+    }
 });

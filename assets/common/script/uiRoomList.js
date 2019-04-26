@@ -24,46 +24,25 @@ cc.Class({
         if (this.editBox.string === '') {
             return
         }
-        nano.request("game.Join", {"version":"1.9.3", "options":{"mode":1}}, this.createRoomRsp.bind(this))
+        nano.request("game.Join", {"version":"1.9.3", "deskId": this.editBox.string}, this.joinRoomResponse.bind(this))
     },
 
+    //加入房间回调
     joinRoomResponse: function(data) {
-        if (data.status !== 200) {
-            console.log('进入房间失败,异步回调错误码: ' + data.status);
-        } else {
-            console.log('进入房间成功');
-            console.log('房间号: ' + data.roomInfo.roomID);
-            if (!data.roomUserInfoList.some(function(x) {
-                return x.userId === GLB.userInfo.id;
-            })) {
-                data.roomUserInfoList.push({
-                    userId: GLB.userInfo.id,
-                    userProfile: ""
-                });
-            }
-            // 设置房间最大人数--
-            for (var i = 0; i < this.roomAttrs.length; i++) {
-                if (data.roomInfo.roomID === this.roomAttrs[i].roomID) {
-                    GLB.MAX_PLAYER_COUNT = this.roomAttrs[i].maxPlayer;
-                    break;
-                }
-            }
+        console.log(data)
+        if (data.code == 0){
+            console.log("desk id:", data.tableInfo.deskId)
 
-            if (cc.Canvas.instance.designResolution.height > cc.Canvas.instance.designResolution.width) {
-                uiFunc.openUI("uiRoomVer", function(obj) {
-                    var room = obj.getComponent('uiRoom');
-                    room.joinRoomInit(data.roomUserInfoList, data.roomInfo);
-                    uiFunc.closeUI(this.node.name);
-                    this.node.destroy();
-                }.bind(this));
-            } else {
-                uiFunc.openUI("uiRoom", function(obj) {
-                    var room = obj.getComponent('uiRoom');
-                    room.joinRoomInit(data.roomUserInfoList, data.roomInfo);
-                    uiFunc.closeUI(this.node.name);
-                    this.node.destroy();
-                }.bind(this));
-            }
+            //打开房间界面
+            GLB.roomId = data.tableInfo.deskId;
+            uiFunc.openUI("uiRoomVer", function(obj) {
+                var room = obj.getComponent('uiRoom');
+                room.joinRoomInit({"roomID":data.tableInfo.deskId, "owner": data.tableInfo.creator});
+                uiFunc.closeUI(this.node.name);
+                this.node.destroy();
+            }.bind(this))
+        }else{
+
         }
     },
 

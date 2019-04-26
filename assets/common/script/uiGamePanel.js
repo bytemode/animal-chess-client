@@ -1,6 +1,4 @@
-var mvs = require("Matchvs");
 var GLB = require("Glb");
-
 
 cc.Class({
     extends: cc.Component,
@@ -12,14 +10,10 @@ cc.Class({
         blueArrow: cc.SpriteFrame
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
-        // this.setPicture();
-        // this.leftBgSprite = this.node.getChildByName('bgImg').getChildByName('colorImg').getChildByName('left').getComponent(cc.Sprite);
-        // this.blueBgSprite = this.node.getChildByName('bgImg').getChildByName('colorImg').getChildByName('right').getComponent(cc.Sprite);
         this.leftBgSprite = this.node.getChildByName('headImg').getChildByName('imgBgLeft').getComponent(cc.Sprite);
         this.blueBgSprite = this.node.getChildByName('headImg').getChildByName('imgBgRight').getComponent(cc.Sprite);
+
         this.timeNode = this.node.getChildByName('time');
         this.timeLeftNode = this.timeNode.getChildByName('left');
         this.timeRightNode = this.timeNode.getChildByName('right');
@@ -29,20 +23,25 @@ cc.Class({
         this.rightArrowSprite = this.timeRightNode.getChildByName('jiantou').getComponent(cc.Sprite);
         this.timeLeftNumNode = this.timeNode.getChildByName('leftTimeNum');
         this.timeRightNumNode = this.timeNode.getChildByName('rightTimeNum');
+
         this.readyNode = this.node.getChildByName('readyGo');
         this.timeNumNode = this.timeNode.getChildByName('num');
         this.timeNumLabel = this.timeNumNode.getComponent(cc.Label);
+
         this.timeAnim = this.timeNumNode.getComponent(cc.Animation);
         this.readyAnim = this.readyNode.getComponent(cc.Animation);
         this.readyAnim.on('finished', this.gameStart, this);
+
         this.selfIcon = this.node.getChildByName('headImg').getChildByName('leftImgMask').getChildByName('leftImg');
         this.rivalIcon = this.node.getChildByName('headImg').getChildByName('rightImgMask').getChildByName('rightImg');
+
         clientEvent.on(clientEvent.eventType.updateTime, this.updateTime, this);
         clientEvent.on(clientEvent.eventType.countTime, this.countTime, this);
         clientEvent.on(clientEvent.eventType.changeFlag, this.changeFlag, this);
         clientEvent.on(clientEvent.eventType.roundStart, this.roundStart, this);
         clientEvent.on(clientEvent.eventType.gameOver, this.gameOver, this);
         clientEvent.on(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
+
         this.readyGoAudio = this.readyNode.getComponent(cc.AudioSource);
     },
 
@@ -92,7 +91,6 @@ cc.Class({
     },
 
     playTimeWarnAnim () {
-        // TODO 初始化当前的状态；
         this.timeAnim.play();
     },
 
@@ -107,8 +105,6 @@ cc.Class({
     },
 
     gameStart () {
-
-        // this.timeLabelInit();
         Game.GameManager.gameState = GameState.Play;
         this.countTime();
         if (GLB.isRoomOwner) {
@@ -226,9 +222,6 @@ cc.Class({
         }
         this.getTurn(param.flag);
         user.isMyTurn ? side = 'Left' : side = 'Right';
-        // var curNode = this['time' + side + 'NumNode'];
-        // var label = curNode.getComponent(cc.Label);
-        // label.string = time;
         this.timeNumLabel.string = time;
     },
 

@@ -2984,9 +2984,6 @@
     "commonNode": {
       "__id__": 24
     },
-    "kick": {
-      "__id__": 76
-    },
     "userIcon": {
       "__id__": 26
     },
@@ -3658,6 +3655,9 @@
     "showAnimation": 0,
     "hideAnimation": 0,
     "isUseMask": false,
+    "txtRoomID": {
+      "__id__": 99
+    },
     "_id": ""
   },
   {
