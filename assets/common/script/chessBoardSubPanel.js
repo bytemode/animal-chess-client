@@ -9,20 +9,10 @@ cc.Class({
         nextStep: cc.Prefab
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         pool.createPrefabPool(this.chess);
         pool.createPrefabPool(this.nextStep);
-        //
-        // this.showChessArr = [];//存棋子
-        // this.showStepArr = [];
-        // this.chessBoardList = [
-        //     [0, 0, 0, 0],
-        //     [0, 0, 0, 0],
-        //     [0, 0, 0, 0],
-        //     [0, 0, 0, 0]
-        // ];
+
         this.init();
         this.fPosList = [];
 

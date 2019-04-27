@@ -31,10 +31,10 @@ cc.Class({
             }.bind(this), 2000);
             return;
         }
+        
         if(event) {
             event.stopPropagation();
         }
-
 
         if (this.isOpen) {
             //已经翻开
@@ -113,6 +113,7 @@ cc.Class({
     getTyp :function() {
         return this.type;
     },
+
     getNode:function(){
         return this.node;
     },
@@ -120,10 +121,7 @@ cc.Class({
     start () {
 
     },
-    onDestroy () {
-        console.log('*****nextStepOndestroy*****')
-       // this.node.off('touchend', this.touchEvent, this);
-    }
 
-    // update (dt) {},
+    onDestroy () {
+    }
 });

@@ -1,4 +1,6 @@
 var GLB = require("Glb");
+var Logic = require("Logic")
+
 require("nano")
 
 cc.Class({
@@ -9,17 +11,16 @@ cc.Class({
             Game.GameManager.node.getComponent(cc.BlockInputEvents).enabled = false;
         }, 1000);
     },
+
     onLoad() {
         Game.GameManager = this;
         cc.game.addPersistRootNode(this.node);
         dataFunc.loadConfigs();
         cc.view.enableAutoFullScreen(false);
         clientEvent.init();
-    },
 
-    logoutResponse: function(status) {
-        cc.game.removePersistRootNode(this.node);
-        cc.director.loadScene('lobby');
+        this.logic = Logic
+        this.logic.init()
     },
 
     errorResponse: function(error, msg) {
@@ -56,6 +57,7 @@ cc.Class({
                 console.log(data)
                 GLB.userInfo = data
                 GLB.userInfo.id = data.acId
+                Game.GameManager.uid = data.acId
                 Game.GameManager.nickName = data.nickname
                 this.lobbyShow()
             }.bind(this))
@@ -82,13 +84,14 @@ cc.Class({
 
     //开始游戏发牌
     startGame: function(data) {
-        //clientEvent.dispatch(clientEvent.eventType.onDuanPai, data);
-        console.log('-----startGame-----')
+        console.log("startGame", data)
+        this.logic.initFaPai(data)
+
+        //加载游戏场景
         cc.director.loadScene('game', function() {
             uiFunc.openUI("uiGamePanel", function(panel) {
-                panel.getComponent("uiGamePanel").timeLabelInit();
-                //理牌结束
-                nano.notify("game.QiPaiFinished", {}) 
+                //初始化游戏包括敌我双向 棋盘信息
+                panel.getComponent("uiGamePanel").gameStart();                
             }.bind(this));
         }.bind(this));
     },
@@ -137,5 +140,4 @@ cc.Class({
         console.log('-----onGameEnd-----')
         clientEvent.dispatch(clientEvent.eventType.onGameEnd, data);
     }
-    
 });

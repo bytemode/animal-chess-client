@@ -4,36 +4,62 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        redFlag: cc.SpriteFrame,
-        blueFlag: cc.SpriteFrame,
-        redArrow: cc.SpriteFrame,
-        blueArrow: cc.SpriteFrame
+        redHeadBg: cc.SpriteFrame, // 红蓝头像框图片
+        blueHeadBg: cc.SpriteFrame,
+
+        redArrow: cc.SpriteFrame,// 红蓝箭头图片
+        blueArrow: cc.SpriteFrame,
+
+        //左右头像框
+        leftHeadBg: {
+            default: null,
+            type: cc.Sprite
+        },
+
+        rightHeadBg: {
+            default: null,
+            type: cc.Sprite
+        },
+
+        //左右头像 左边默认是自己
+        leftHead: {
+            default: null,
+            type: cc.Sprite
+        },
+
+        rightHead:{
+            default: null,
+            type:cc.Sprite
+        },
+
+        //左右箭头
+        leftArrowSprite: {
+            default: null,
+            type: cc.Sprite
+        },
+
+        rightArrowSprite:{
+            default: null,
+            type:cc.Sprite
+        },
     },
 
     onLoad () {
-        this.leftBgSprite = this.node.getChildByName('headImg').getChildByName('imgBgLeft').getComponent(cc.Sprite);
-        this.blueBgSprite = this.node.getChildByName('headImg').getChildByName('imgBgRight').getComponent(cc.Sprite);
-
+        //回合时间节点
         this.timeNode = this.node.getChildByName('time');
-        this.timeLeftNode = this.timeNode.getChildByName('left');
-        this.timeRightNode = this.timeNode.getChildByName('right');
-        this.timeLeftTxt = this.node.getChildByName('leftTimeTxt');
-        this.timeRightTxt = this.node.getChildByName('rightTimeTxt');
-        this.leftArrowSprite = this.timeLeftNode.getChildByName('jiantou').getComponent(cc.Sprite);
-        this.rightArrowSprite = this.timeRightNode.getChildByName('jiantou').getComponent(cc.Sprite);
-        this.timeLeftNumNode = this.timeNode.getChildByName('leftTimeNum');
-        this.timeRightNumNode = this.timeNode.getChildByName('rightTimeNum');
+        this.timeLeftNode = this.timeNode.getChildByName('left'); //我方
+        this.timeRightNode = this.timeNode.getChildByName('right'); //他仿
 
-        this.readyNode = this.node.getChildByName('readyGo');
+        //倒计时
         this.timeNumNode = this.timeNode.getChildByName('num');
         this.timeNumLabel = this.timeNumNode.getComponent(cc.Label);
-
+        //时间动画
         this.timeAnim = this.timeNumNode.getComponent(cc.Animation);
-        this.readyAnim = this.readyNode.getComponent(cc.Animation);
-        this.readyAnim.on('finished', this.gameStart, this);
 
-        this.selfIcon = this.node.getChildByName('headImg').getChildByName('leftImgMask').getChildByName('leftImg');
-        this.rivalIcon = this.node.getChildByName('headImg').getChildByName('rightImgMask').getChildByName('rightImg');
+        //readygo ani
+        this.readyNode = this.node.getChildByName('readyGo');
+        this.readyAnim = this.readyNode.getComponent(cc.Animation);
+        this.readyAnim.on('finished', this.notifyReady, this);
 
         clientEvent.on(clientEvent.eventType.updateTime, this.updateTime, this);
         clientEvent.on(clientEvent.eventType.countTime, this.countTime, this);
@@ -43,22 +69,6 @@ cc.Class({
         clientEvent.on(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
 
         this.readyGoAudio = this.readyNode.getComponent(cc.AudioSource);
-    },
-
-    setPicture () {
-         var redFlagUrl = cc.url.raw("resources/picture/animal/" + "redHead" + ".png");
-         this.redFlag = new cc.SpriteFrame(redFlagUrl);
-         var blueFlagUrl = cc.url.raw("resources/picture/animal/" + "blueHead" + ".png");
-         this.blueFlag = new cc.SpriteFrame(blueFlagUrl);
-         var redArrowUrl = cc.url.raw("resources/picture/animal/" + "redTime" + ".png");
-         this.redArrow = new cc.SpriteFrame(redArrowUrl);
-         var blueArrowUrl = cc.url.raw("resources/picture/animal/" + "blueTime" + ".png");
-         this.blueArrow = new cc.SpriteFrame(blueArrowUrl);
-    },
-
-    setHeadIcon () {
-        this.selfIcon.getComponent('playerIcon').setData({id: GLB.playerUserIds[0]});
-        this.rivalIcon.getComponent('playerIcon').setData({id: GLB.playerUserIds[1]});
     },
 
     gameOver () {
@@ -76,61 +86,12 @@ cc.Class({
         this.timeLabelInit();
         clearInterval(this.interval);
         this.playerFlag = GLB.PLAYER_FLAG.RED;
-        // this.getTurn(this.playerFlag);
         user.init();
         this.headColorInit();
         clientEvent.dispatch(clientEvent.eventType.getMap);
         this.playReadyGo();
         this.setTimeNumFont();
         this.setHeadIcon();
-    },
-
-    playReadyGo() {
-        this.readyAnim.play();
-        this.readyGoAudio.play();
-    },
-
-    playTimeWarnAnim () {
-        this.timeAnim.play();
-    },
-
-    stopTimeWarnAnim () {
-        this.timeAnim.stop();
-    },
-
-    timeLabelInit () {
-        this.timeNode.active = false;
-        this.timeNumLabel.string = 30;
-        this.timeNode.getChildByName('num').setScale(1,1);
-    },
-
-    gameStart () {
-        Game.GameManager.gameState = GameState.Play;
-        this.countTime();
-        if (GLB.isRoomOwner) {
-            uiFunc.openUI('uiRoundTip', function (panel) {
-                var uiRoundTip = panel.getComponent('uiRoundTip');
-                uiRoundTip.setData(GLB.ROUND_TIP.SELF);
-            })
-        }
-    },
-
-    headColorInit () {
-        // 主机为红色方；
-        var leftSprite,rightSprite;
-        if (GLB.isRoomOwner) {
-            leftSprite = this.redFlag;
-            rightSprite = this.blueFlag;
-            this.leftArrowSprite.spriteFrame = this.redArrow;
-            this.rightArrowSprite.spriteFrame = this.blueArrow;
-        } else {
-            leftSprite = this.blueFlag;
-            rightSprite = this.redFlag;
-            this.leftArrowSprite.spriteFrame = this.blueArrow;
-            this.rightArrowSprite.spriteFrame = this.redArrow;
-        }
-        this.leftBgSprite.spriteFrame = leftSprite;
-        this.blueBgSprite.spriteFrame = rightSprite;
     },
 
     exit() {
@@ -164,11 +125,6 @@ cc.Class({
         }.bind(this), 1000);
     },
 
-    countDownEvent () {
-        var msg = {action: GLB.COUNT_TIME, flag: this.playerFlag, time: this.time};
-        Game.GameManager.sendEventEx(msg);
-    },
-
     changeFlag () {
         this.playerFlag === GLB.PLAYER_FLAG.RED ? this.playerFlag = GLB.PLAYER_FLAG.BLUE :this.playerFlag = GLB.PLAYER_FLAG.RED;
         this.getTurn(this.playerFlag);
@@ -196,17 +152,14 @@ cc.Class({
         this.timeNode.active = true;
     },
 
+    //显示回合信息
     showCurTurnLabel () {
         if (user.isMyTurn) {
             this.timeLeftNode.active = true;
-            // this.timeLeftNumNode.active = true;
             this.timeRightNode.active = false;
-            // this.timeRightNumNode.active = false;
         } else {
             this.timeLeftNode.active = false;
-            // this.timeLeftNumNode.active = false;
             this.timeRightNode.active = true;
-           // this.timeRightNumNode.active = true;
         }
     },
 
@@ -234,6 +187,76 @@ cc.Class({
         clientEvent.off(clientEvent.eventType.roundStart, this.roundStart, this);
         clientEvent.off(clientEvent.eventType.gameOver, this.gameOver, this);
         clientEvent.off(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
-    }
-    // update (dt) {},
+    },
+
+
+    //----------------------------------------------------------------------
+    playReadyGo() {
+        this.readyAnim.play();
+        this.readyGoAudio.play();
+    },
+
+    playTimeWarnAnim () {
+        this.timeAnim.play();
+    },
+
+    stopTimeWarnAnim () {
+        this.timeAnim.stop();
+    },
+
+    //初始化时间控件
+    timeLabelInit () {
+        this.timeNode.active = false;
+        this.timeNumLabel.string = 30;
+        this.timeNode.getChildByName('num').setScale(1, 1);
+    },
+
+    //初始化头像信息
+    headColorInit () {
+        //我方头像放置在左侧
+        var camp = Game.GameManager.logic.getCampById(Game.GameManager.uid) //1 为红 2 为蓝
+        if (camp == 1){
+            this.leftArrowSprite.spriteFrame = this.redArrow;
+            this.leftHeadBg.spriteFrame = this.redHeadBg;
+
+            this.rightArrowSprite.spriteFrame = this.blueArrow;
+            this.rightHeadBg.spriteFrame = this.blueHeadBg;
+        }else{
+            this.leftArrowSprite.spriteFrame = this.blueArrow;
+            this.leftHeadBg.spriteFrame = this.blueHeadBg;
+
+            this.rightArrowSprite.spriteFrame = this.redArrow;
+            this.rightHeadBg.spriteFrame = this.redHeadBg;
+        }
+    },
+
+    //设置头像
+    setHeadIcon () {
+        this.leftHead.getComponent('playerIcon').setData({id: GLB.playerUserIds[0]});
+        this.rightHead.getComponent('playerIcon').setData({id: GLB.playerUserIds[1]});
+    },
+
+    //收到发牌消息,游戏开始
+    gameStart: function(){
+        Game.GameManager.gameState = GameState.Play;
+
+        //初始化红蓝头像 初始化箭头等红蓝信息 自己在左侧
+        this.headColorInit()
+
+        //设置头像信息
+        this.setHeadIcon()
+
+        //初始化时间信息
+        this.timeLabelInit()
+
+        //初始化棋盘
+
+        //播放readygo动画完成之后开始回合的通知
+        tihs.playReadyGo()
+    },
+
+    //read go 之后开始通知服务器客户端准备完成
+    notifyReady: function(){
+        nano.notify("game.QiPaiFinished", {}) 
+    },
 });
