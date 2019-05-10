@@ -1,0 +1,1851 @@
+window._CCSettings = {
+    designWidth: 750,
+    designHeight: 1334,
+    groupList: [
+        "default",
+        "duck",
+        "bullet",
+        "player"
+    ],
+    collisionMatrix: [
+        [
+            false
+        ],
+        [
+            false,
+            false,
+            true
+        ],
+        [
+            false,
+            true,
+            true,
+            true
+        ],
+        [
+            false,
+            false,
+            true,
+            false
+        ]
+    ],
+    platform: "web-desktop",
+    scripts: [
+        {
+            deps: {},
+            file: "preview-scripts/assets/basic/script/rankUserInfo.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/lobby/playerIcon.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/lobby/resultPlayerIcon.js"
+        },
+        {
+            deps: {
+                Matchvs: 9
+            },
+            file: "preview-scripts/assets/common/lobby/roomInfo.js"
+        },
+        {
+            deps: {
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/lobby/roomUserInfo.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/DataFunc.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/Glb.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/Globals.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/Logic.js"
+        },
+        {
+            deps: {
+                "matchvs.all": 44,
+                MatchvsEngine: 10
+            },
+            file: "preview-scripts/assets/common/script/basic/Matchvs.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/MatchvsEngine.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/UIFunc.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/messenger/clientEvent.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/messenger/eventListener.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/nano.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/pool.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/rankNetwork/msgType.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/rankNetwork/network.js"
+        },
+        {
+            deps: {
+                buffer: 46
+            },
+            file: "preview-scripts/assets/common/script/basic/rankNetwork/pomeloBuild.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/uiPanel.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/basic/umdMqtt.js"
+        },
+        {
+            deps: {
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/chess.js"
+        },
+        {
+            deps: {
+                Glb: 6,
+                pool: 15
+            },
+            file: "preview-scripts/assets/common/script/chessBoardSubPanel.js"
+        },
+        {
+            deps: {
+                Glb: 6,
+                Logic: 8,
+                nano: 14
+            },
+            file: "preview-scripts/assets/common/script/gameManager.js"
+        },
+        {
+            deps: {
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/nextStep.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/player.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiExit.js"
+        },
+        {
+            deps: {
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiGamePanel.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiLobbyPanel.js"
+        },
+        {
+            deps: {
+                uiPanel: 19
+            },
+            file: "preview-scripts/assets/common/script/uiLogin.js"
+        },
+        {
+            deps: {
+                uiPanel: 19
+            },
+            file: "preview-scripts/assets/common/script/uiMaskLayout.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiMatching.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiMatching1v1.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiMatching1v1Ver.js"
+        },
+        {
+            deps: {
+                uiPanel: 19
+            },
+            file: "preview-scripts/assets/common/script/uiRankPanel.js"
+        },
+        {
+            deps: {
+                uiPanel: 19
+            },
+            file: "preview-scripts/assets/common/script/uiResult.js"
+        },
+        {
+            deps: {
+                uiPanel: 19
+            },
+            file: "preview-scripts/assets/common/script/uiResultPanel.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiRoom.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiRoomList.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiRoundTip.js"
+        },
+        {
+            deps: {
+                uiPanel: 19
+            },
+            file: "preview-scripts/assets/common/script/uiTip.js"
+        },
+        {
+            deps: {
+                uiPanel: 19,
+                Matchvs: 9,
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/uiVsResult.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/assets/common/script/updateScore.js"
+        },
+        {
+            deps: {
+                Glb: 6
+            },
+            file: "preview-scripts/assets/common/script/user.js"
+        },
+        {
+            deps: {},
+            file: "preview-scripts/plugin-matchvs-js/matchvs.all.js"
+        },
+        {
+            isNodeModule: true,
+            deps: {},
+            file: "preview-scripts/__node_modules/base64-js/index.js"
+        },
+        {
+            isNodeModule: true,
+            deps: {
+                "base64-js": 45,
+                ieee754: 48,
+                isarray: 47
+            },
+            file: "preview-scripts/__node_modules/buffer/index.js"
+        },
+        {
+            isNodeModule: true,
+            deps: {},
+            file: "preview-scripts/__node_modules/buffer/node_modules/isarray/index.js"
+        },
+        {
+            isNodeModule: true,
+            deps: {},
+            file: "preview-scripts/__node_modules/ieee754/index.js"
+        }
+    ],
+    rawAssets: {
+        assets: {
+            "306eafe3-04c1-4ed7-9963-a8b9cb745179": [
+                "audio/closeAll.mp3",
+                "cc.AudioClip"
+            ],
+            "a8a9b1ca-c55a-4f22-8176-c411fef6f733": [
+                "audio/closelittle.mp3",
+                "cc.AudioClip"
+            ],
+            "70710d7c-69c5-422f-8766-d0ee729d9e2f": [
+                "audio/gameover.mp3",
+                "cc.AudioClip"
+            ],
+            "986ddbd1-2c7f-44b1-94d5-04b554703290": [
+                "audio/hit.mp3",
+                "cc.AudioClip"
+            ],
+            "41871449-48d7-4058-91ce-308a181c1ee9": [
+                "audio/laugh.mp3",
+                "cc.AudioClip"
+            ],
+            "be7c7434-0a3f-404a-9630-ee584de4ba92": [
+                "audio/lose.mp3",
+                "cc.AudioClip"
+            ],
+            "17329a06-1ed1-4178-b4ef-f09cf1e55e6c": [
+                "audio/openAll.mp3",
+                "cc.AudioClip"
+            ],
+            "4aee20e5-12d5-431b-91c7-c5fc30e701cb": [
+                "audio/readygo.mp3",
+                "cc.AudioClip"
+            ],
+            "39a933fa-6f49-4a81-bb13-cce63c85e476": [
+                "audio/standUp.mp3",
+                "cc.AudioClip"
+            ],
+            "719a8924-9a8d-4423-b093-80ae91991f05": [
+                "audio/teacher.mp3",
+                "cc.AudioClip"
+            ],
+            "2d878e4b-0baa-4cee-81ca-e8ee930db8dd": [
+                "audio/timeOver.mp3",
+                "cc.AudioClip"
+            ],
+            "1ceb701f-3aa5-45a6-9daf-c261fabbecbf": [
+                "audio/vitory.mp3",
+                "cc.AudioClip"
+            ],
+            "1e592619-1f46-4a7a-8ee4-ef766fefc4f3": [
+                "panel/mainPanel/animation/leftAnm1.anim",
+                "cc.AnimationClip"
+            ],
+            "10de32c8-45fa-46a0-b563-e40324896dfd": [
+                "panel/mainPanel/animation/leftAnm2.anim",
+                "cc.AnimationClip"
+            ],
+            "c1ec826d-3e69-4000-92a0-c25dc83df299": [
+                "panel/mainPanel/animation/leftAnm3.anim",
+                "cc.AnimationClip"
+            ],
+            "ca8326b3-f722-4979-a482-d7c43e073387": [
+                "panel/mainPanel/animation/leftAnm4.anim",
+                "cc.AnimationClip"
+            ],
+            "f5ffb5e4-268a-46f6-82da-3afe416a011f": [
+                "panel/mainPanel/animation/openAnm.anim",
+                "cc.AnimationClip"
+            ],
+            "f3be11e4-ae01-4ef2-a21f-b01b5a2fe211": [
+                "panel/mainPanel/animation/pickUp.anim",
+                "cc.AnimationClip"
+            ],
+            "5fd9dfc1-829c-4d1b-8b0a-5a640029dbbf": [
+                "panel/mainPanel/animation/putDown.anim",
+                "cc.AnimationClip"
+            ],
+            "b5709ff3-30ff-4cea-acba-6e917293c4e0": [
+                "panel/mainPanel/animation/rightAnm1.anim",
+                "cc.AnimationClip"
+            ],
+            "ea46c130-bcb8-42e5-a81c-91cc6a7d4722": [
+                "panel/mainPanel/animation/rightAnm2.anim",
+                "cc.AnimationClip"
+            ],
+            "7cfa2085-6987-413b-9a63-0b8fc4a7a1df": [
+                "panel/mainPanel/animation/rightAnm3.anim",
+                "cc.AnimationClip"
+            ],
+            "52712a6c-e06b-4829-a06a-e0d33758ce25": [
+                "panel/mainPanel/animation/rightAnm4.anim",
+                "cc.AnimationClip"
+            ],
+            "738705b0-5c85-422e-b7e3-919d151c1c6c": [
+                "panel/mainPanel/animation/yanwu.anim",
+                "cc.AnimationClip"
+            ],
+            "d6cc6787-3af5-4e53-bd5f-988cc7db3b73": [
+                "panel/mainPanel/baozi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a916034e-9ade-428e-a66c-28ce8cc3571f": [
+                "panel/mainPanel/baozi.png",
+                "cc.Texture2D"
+            ],
+            "cdb0599d-94b5-4090-b2d8-2721ac12465e": [
+                "panel/mainPanel/biaoqingdi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ac5a6498-451f-403d-ae56-f72993ae3f8b": [
+                "panel/mainPanel/biaoqingdi.png",
+                "cc.Texture2D"
+            ],
+            "29f63b11-405f-4fc6-b77a-d045637fa75e": [
+                "panel/mainPanel/chess.prefab",
+                "cc.Prefab"
+            ],
+            "194bd6a2-cbdd-41c7-8206-24ca53d7dc84": [
+                "panel/mainPanel/daxiang",
+                "cc.SpriteFrame",
+                1
+            ],
+            "153878a0-1d8d-455b-a188-fd78e79e2167": [
+                "panel/mainPanel/daxiang.png",
+                "cc.Texture2D"
+            ],
+            "61fa1a9d-4c25-4cfd-a698-dd18576bfe38": [
+                "panel/mainPanel/down",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2ab80622-30cf-421e-8dfd-3e280d4132b2": [
+                "panel/mainPanel/down.png",
+                "cc.Texture2D"
+            ],
+            "ae4c285b-369a-498f-a202-2784614ffa8f": [
+                "panel/mainPanel/fanmian",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d0e3bc71-3067-40eb-b641-cb9b0aeed363": [
+                "panel/mainPanel/fanmian.png",
+                "cc.Texture2D"
+            ],
+            "056a2a91-5486-4b38-b843-d80e7e9a007f": [
+                "panel/mainPanel/gou",
+                "cc.SpriteFrame",
+                1
+            ],
+            "f20882bb-433f-4452-9bda-3a36d2b1ac55": [
+                "panel/mainPanel/gou.png",
+                "cc.Texture2D"
+            ],
+            "1ffed52e-cb3f-4b2e-8c66-b9ea0c6fb69b": [
+                "panel/mainPanel/heidi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2036c4f0-0059-46e8-b821-598ffc26320d": [
+                "panel/mainPanel/heidi.png",
+                "cc.Texture2D"
+            ],
+            "95d0c8e4-cd5e-4a16-947c-547ef5f93637": [
+                "panel/mainPanel/hongqi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "3cfc8a7c-d92d-447c-8743-48b46c1d9402": [
+                "panel/mainPanel/hongqi.png",
+                "cc.Texture2D"
+            ],
+            "6a19390f-ccd0-41db-b4cd-f50e8bd41b10": [
+                "panel/mainPanel/hongse",
+                "cc.SpriteFrame",
+                1
+            ],
+            "11a63371-682a-4710-b79b-c8dff4da9670": [
+                "panel/mainPanel/hongse.png",
+                "cc.Texture2D"
+            ],
+            "d4a4eaae-41f7-4d1e-8113-640b32dad804": [
+                "panel/mainPanel/image/hongkuang",
+                "cc.SpriteFrame",
+                1
+            ],
+            "82b86a30-7331-4ab5-b193-14767f47853e": [
+                "panel/mainPanel/image/hongkuang.png",
+                "cc.Texture2D"
+            ],
+            "4b9d52a9-d538-435b-955b-adefc065ab4b": [
+                "panel/mainPanel/image/lanbiao",
+                "cc.SpriteFrame",
+                1
+            ],
+            "310bf649-8103-4c07-ac5a-93a6f362f36a": [
+                "panel/mainPanel/image/lanbiao.png",
+                "cc.Texture2D"
+            ],
+            "59a75c56-2f0e-4adf-8e46-2aae5389103e": [
+                "panel/mainPanel/image/lankuang",
+                "cc.SpriteFrame",
+                1
+            ],
+            "3820af1c-7b0e-4aae-b0e8-c8285e5d92ba": [
+                "panel/mainPanel/image/lankuang.png",
+                "cc.Texture2D"
+            ],
+            "ffaf3d9e-7957-48c0-af71-c35a316cb15e": [
+                "panel/mainPanel/image/man1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "086e6a76-a3af-499b-98be-9eb027802b1c": [
+                "panel/mainPanel/image/man1.png",
+                "cc.Texture2D"
+            ],
+            "2abd9073-17c4-4265-a986-babcc93c4fc0": [
+                "panel/mainPanel/image/man2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "4503736d-a356-4768-9baf-13eb992499f5": [
+                "panel/mainPanel/image/man2.png",
+                "cc.Texture2D"
+            ],
+            "268fe897-7cb4-469c-b35c-cbe759c00df7": [
+                "panel/mainPanel/image/man3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "e1c969c6-026a-4ebf-955d-c406baa5b5e5": [
+                "panel/mainPanel/image/man3.png",
+                "cc.Texture2D"
+            ],
+            "67ccd9a0-7385-483b-87b0-87f232be9a44": [
+                "panel/mainPanel/image/man4",
+                "cc.SpriteFrame",
+                1
+            ],
+            "56048733-2227-4b0b-a08e-d5e46ac24816": [
+                "panel/mainPanel/image/man4.png",
+                "cc.Texture2D"
+            ],
+            "d71bfe15-919e-4105-a0b4-a9ba6ec32942": [
+                "panel/mainPanel/iphonex",
+                "cc.SpriteFrame",
+                1
+            ],
+            "e267a9bc-1308-494b-a13f-d151b6a8458a": [
+                "panel/mainPanel/iphonex.jpg",
+                "cc.Texture2D"
+            ],
+            "2664b020-56f1-4efb-82a5-35174bcfa039": [
+                "panel/mainPanel/jiantou",
+                "cc.SpriteFrame",
+                1
+            ],
+            "9cf881ba-5dc4-427f-92dd-2ffe16b735df": [
+                "panel/mainPanel/jiantou.png",
+                "cc.Texture2D"
+            ],
+            "960ac86b-2080-4fea-84a3-8577ec9c13a3": [
+                "panel/mainPanel/lahu",
+                "cc.SpriteFrame",
+                1
+            ],
+            "fcabd792-6b11-4ede-9192-b14c2eaa20b7": [
+                "panel/mainPanel/lahu.png",
+                "cc.Texture2D"
+            ],
+            "d112bd83-0811-488d-9e8a-2ded20f0b33f": [
+                "panel/mainPanel/lang",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a5e99bda-ef70-4b4e-9446-48d94484e3fa": [
+                "panel/mainPanel/lang.png",
+                "cc.Texture2D"
+            ],
+            "a7712d04-2629-4d20-afa0-267a79a7298e": [
+                "panel/mainPanel/lanqi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "72251b2f-b054-466d-be40-6ade045d1ed5": [
+                "panel/mainPanel/lanqi.png",
+                "cc.Texture2D"
+            ],
+            "e764941b-9471-4a6d-8a2e-d13d74aaf64e": [
+                "panel/mainPanel/lanse",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b7d6402c-840c-4271-ac6f-d772ef21fbb1": [
+                "panel/mainPanel/lanse.png",
+                "cc.Texture2D"
+            ],
+            "9d48f4d0-2498-41bf-97f1-fa05cb23437d": [
+                "panel/mainPanel/laoshu",
+                "cc.SpriteFrame",
+                1
+            ],
+            "c39a545a-58ab-4739-9578-42f7fb175563": [
+                "panel/mainPanel/laoshu.png",
+                "cc.Texture2D"
+            ],
+            "43b09297-b2aa-41f1-b2f8-d1ffa994e465": [
+                "panel/mainPanel/mao",
+                "cc.SpriteFrame",
+                1
+            ],
+            "0d3a676e-9dd2-4b9c-9d77-a01ef8d508ed": [
+                "panel/mainPanel/mao.png",
+                "cc.Texture2D"
+            ],
+            "b9c56da8-7319-499e-a98e-4dfc9d4ccd22": [
+                "panel/mainPanel/nextStep.prefab",
+                "cc.Prefab"
+            ],
+            "0bd644fa-0821-4da6-8a59-74bb29f030a8": [
+                "panel/mainPanel/qiuhe",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b03aaf3a-623e-4efd-a59d-b114d42457ce": [
+                "panel/mainPanel/qiuhe.png",
+                "cc.Texture2D"
+            ],
+            "61ef3eb6-97a7-4873-9181-420038eca924": [
+                "panel/mainPanel/redDaxiang",
+                "cc.SpriteFrame",
+                1
+            ],
+            "5c209daf-7a4d-445e-a990-b97f88f250f6": [
+                "panel/mainPanel/redDaxiang.png",
+                "cc.Texture2D"
+            ],
+            "9cd429b8-d343-4bbd-8523-3b7e7b330759": [
+                "panel/mainPanel/redLang",
+                "cc.SpriteFrame",
+                1
+            ],
+            "bcce1de8-9558-48fe-beea-fc2bd8b70c01": [
+                "panel/mainPanel/redLang.png",
+                "cc.Texture2D"
+            ],
+            "10726f55-225f-45af-8051-14ca801c55f7": [
+                "panel/mainPanel/redLaohu",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a4cf5ef2-5f7b-4030-8974-048b526ba057": [
+                "panel/mainPanel/redLaohu.png",
+                "cc.Texture2D"
+            ],
+            "bc121e1c-747d-408a-8ff8-636fa9b2a190": [
+                "panel/mainPanel/redLaoshu",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a3e9617d-1e26-428f-8400-3c964b8438e5": [
+                "panel/mainPanel/redLaoshu.png",
+                "cc.Texture2D"
+            ],
+            "ee34fd94-52f2-41aa-ae39-01fcd26fc0d2": [
+                "panel/mainPanel/redMao",
+                "cc.SpriteFrame",
+                1
+            ],
+            "acc48247-9443-4d06-99e6-6de217d36b2b": [
+                "panel/mainPanel/redMao.png",
+                "cc.Texture2D"
+            ],
+            "e9b6a434-7dad-4005-b3a4-3dd19fb08563": [
+                "panel/mainPanel/redShizi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "bc30a886-f17f-4976-9004-3864a6f25edb": [
+                "panel/mainPanel/redShizi.png",
+                "cc.Texture2D"
+            ],
+            "2a7a0ee4-2a6e-474a-b2d9-24fed0a62d97": [
+                "panel/mainPanel/redbaozi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ce28e353-18cd-4c34-aef7-e595e04d4303": [
+                "panel/mainPanel/redbaozi.png",
+                "cc.Texture2D"
+            ],
+            "14029dc1-589d-4a38-946a-95875762038e": [
+                "panel/mainPanel/redgou",
+                "cc.SpriteFrame",
+                1
+            ],
+            "c4053655-1087-48a4-955f-b71bab47be2e": [
+                "panel/mainPanel/redgou.png",
+                "cc.Texture2D"
+            ],
+            "9d7bafa9-3854-4b26-85dd-753d5d10c2fd": [
+                "panel/mainPanel/renshu",
+                "cc.SpriteFrame",
+                1
+            ],
+            "143a7e12-b4a7-454f-bb15-e2ba6be2c64a": [
+                "panel/mainPanel/renshu.png",
+                "cc.Texture2D"
+            ],
+            "15c7758d-159c-46d6-b535-5eb2b6a9fc35": [
+                "panel/mainPanel/shizi",
+                "cc.SpriteFrame",
+                1
+            ],
+            "89026431-6dda-41cc-862e-0d3da216e870": [
+                "panel/mainPanel/shizi.png",
+                "cc.Texture2D"
+            ],
+            "b5a5835e-8b7e-479f-862a-bb745369c564": [
+                "panel/mainPanel/up",
+                "cc.SpriteFrame",
+                1
+            ],
+            "4239e90d-94e5-49dc-a692-8f37493526b5": [
+                "panel/mainPanel/up.png",
+                "cc.Texture2D"
+            ],
+            "b7aae785-2f5c-43cf-a32e-e2b2daaba55b": [
+                "panel/mainPanel/ya",
+                "cc.SpriteFrame",
+                1
+            ],
+            "99233b99-3359-4cf7-96a2-294204190724": [
+                "panel/mainPanel/ya.png",
+                "cc.Texture2D"
+            ],
+            "5c3f5df6-938e-4371-85e0-2d468291a9dd": [
+                "panel/mainPanel/yanwu1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a0528fab-4c3b-41cc-b26e-ed70d0869a4f": [
+                "panel/mainPanel/yanwu1.png",
+                "cc.Texture2D"
+            ],
+            "e3e199a1-22c7-49d6-b9f4-d2d23d89cc99": [
+                "panel/mainPanel/yanwu2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "bfe06283-3d21-4a12-bd13-3793177a9488": [
+                "panel/mainPanel/yanwu2.png",
+                "cc.Texture2D"
+            ],
+            "0227d3cb-33cb-439f-936b-1fffa775e815": [
+                "panel/mainPanel/yanwu3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d398f2d5-5b6e-41bc-b891-1c9c09ee1da7": [
+                "panel/mainPanel/yanwu3.png",
+                "cc.Texture2D"
+            ],
+            "89a91c44-2558-48b4-877e-c2e73d22cc24": [
+                "panel/timeOverPanel/Texture/shijiandao",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2e63b4c4-44a6-459f-940a-9ac686866946": [
+                "panel/timeOverPanel/Texture/shijiandao.png",
+                "cc.Texture2D"
+            ],
+            "128ebe5a-6f35-4651-b3d5-e533cb7054ac": [
+                "panel/timeOverPanel/timeover.anim",
+                "cc.AnimationClip"
+            ],
+            "413499f2-1e7d-4b10-9122-82840eacbc64": [
+                "panelAnimClips/ScaleAndAlpha.anim",
+                "cc.AnimationClip"
+            ],
+            "354e1662-5969-4d52-bcda-4b00ee7a38f8": [
+                "picture/animal/blueHead",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2633eb45-22ab-47fd-9b70-2af831947958": [
+                "picture/animal/blueHead.png",
+                "cc.Texture2D"
+            ],
+            "510d8170-67fe-47f2-87c5-36761552e4c1": [
+                "picture/animal/blueTime",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b7960e83-0a1e-4c3f-9325-b27fe365116d": [
+                "picture/animal/blueTime.png",
+                "cc.Texture2D"
+            ],
+            "aa0c1ee1-6d4c-4f2b-8d4f-3d55fc87857e": [
+                "picture/animal/exit",
+                "cc.SpriteFrame",
+                1
+            ],
+            "cc17ed7d-314d-4f8c-ab35-e27d79d130f4": [
+                "picture/animal/exit.png",
+                "cc.Texture2D"
+            ],
+            "f011e7ab-42c9-4633-8da4-e2fca4b5d2d5": [
+                "picture/animal/redHead",
+                "cc.SpriteFrame",
+                1
+            ],
+            "80704f19-47ca-487c-9d27-2eb42427ea4e": [
+                "picture/animal/redHead.png",
+                "cc.Texture2D"
+            ],
+            "44152a15-82ed-4d71-a1dc-180d1ed1b8d8": [
+                "picture/animal/redTime",
+                "cc.SpriteFrame",
+                1
+            ],
+            "475fc0cd-4712-4afe-993f-3f8b130667a1": [
+                "picture/animal/redTime.png",
+                "cc.Texture2D"
+            ],
+            "d68a8401-5e8b-4ac3-b203-cec05b0ab17f": [
+                "sound/0.mp3",
+                "cc.AudioClip"
+            ],
+            "d5b346d7-abfa-4ffc-be16-c996859e6ffa": [
+                "sound/1.mp3",
+                "cc.AudioClip"
+            ],
+            "1bc5d1f8-18a5-45c2-be24-765a1b02cb6f": [
+                "sound/2.mp3",
+                "cc.AudioClip"
+            ],
+            "12fd3235-b453-4c1e-8e0b-0d7bb9ba0f0d": [
+                "sound/3.mp3",
+                "cc.AudioClip"
+            ],
+            "a422968a-23c4-4e8c-b729-81bdda0829ca": [
+                "sound/4.mp3",
+                "cc.AudioClip"
+            ],
+            "329e3ed0-179c-4053-8aea-94afd65a3f14": [
+                "sound/5.mp3",
+                "cc.AudioClip"
+            ],
+            "dc2a53f5-027b-42c3-9997-bd8476ba0fbd": [
+                "sound/6.mp3",
+                "cc.AudioClip"
+            ],
+            "fa776e61-97e0-44d7-891a-4fcc1e41bebb": [
+                "sound/7.mp3",
+                "cc.AudioClip"
+            ],
+            "1a6aa9f3-dbe5-40cb-bd8f-c7baa9d41e5f": [
+                "sound/allDie.mp3",
+                "cc.AudioClip"
+            ],
+            "9f5eeae8-160f-456f-852c-8534598f5f98": [
+                "sound/btnClick.mp3",
+                "cc.AudioClip"
+            ],
+            "c0e3ff64-156c-4bc8-9531-a723edc03cde": [
+                "sound/countTime.mp3",
+                "cc.AudioClip"
+            ],
+            "3221089d-8e87-4ae9-95bf-abbe778dfa23": [
+                "sound/cutDownAlert.mp3",
+                "cc.AudioClip"
+            ],
+            "868aec30-6a1b-49eb-a734-1e0b6380d986": [
+                "sound/draw.mp3",
+                "cc.AudioClip"
+            ],
+            "5a0d9337-da27-47b1-b822-80d2a97c8ad4": [
+                "sound/eat.mp3",
+                "cc.AudioClip"
+            ],
+            "e859a22e-4949-4955-8e3c-dcce821b57c3": [
+                "sound/endRound.mp3",
+                "cc.AudioClip"
+            ],
+            "6b7eb44c-2bbc-47ea-ac3b-bd425bdc6dcd": [
+                "sound/fail.mp3",
+                "cc.AudioClip"
+            ],
+            "14afa6c0-e1aa-4976-a13a-bc9794199e61": [
+                "sound/gameBegin.mp3",
+                "cc.AudioClip"
+            ],
+            "fa915d94-c554-4cf0-bb2e-db8caed24ae1": [
+                "sound/go.mp3",
+                "cc.AudioClip"
+            ],
+            "56e5f93d-a3b6-48eb-afab-a6bc0bda0be5": [
+                "sound/pieceClick.mp3",
+                "cc.AudioClip"
+            ],
+            "fe3098e8-00ba-4d6f-a5f3-07698ea4955d": [
+                "sound/ready.mp3",
+                "cc.AudioClip"
+            ],
+            "c62b8730-b178-43f2-88f4-a6f3a43f9c44": [
+                "sound/vsFlash.mp3",
+                "cc.AudioClip"
+            ],
+            "456d974f-897d-4ea4-ae8d-65f34214850f": [
+                "sound/win.mp3",
+                "cc.AudioClip"
+            ],
+            "604f1166-cb1c-41db-abaa-9f5c1c15d07a": [
+                "texture/bar-user1.1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "affeb652-7425-4340-abf6-73b02eaea9c9": [
+                "texture/bar-user1.1.png",
+                "cc.Texture2D"
+            ],
+            "1b08d04d-abf3-4563-8dbd-30c0a6715490": [
+                "texture/bar-user1.2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "e1693b03-6dd3-41af-a124-fb71fa3f7d2c": [
+                "texture/bar-user1.2.png",
+                "cc.Texture2D"
+            ],
+            "745ee64b-5fb2-4aec-bbc9-c33ce34a3900": [
+                "texture/bar-user2.1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "cbcd3591-9c27-4ad3-8d09-d2964b342708": [
+                "texture/bar-user2.1.png",
+                "cc.Texture2D"
+            ],
+            "289e25dd-8c80-43ad-b478-b8ceac75fe13": [
+                "texture/bar-user2.2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "1917764b-930f-4613-87b5-b3e5468a7384": [
+                "texture/bar-user2.2.png",
+                "cc.Texture2D"
+            ],
+            "774e8183-080c-46b2-82d3-759acadd8703": [
+                "texture/bar-user3.1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "8482ac90-34f9-4930-b8b5-36993687ecdf": [
+                "texture/bar-user3.1.png",
+                "cc.Texture2D"
+            ],
+            "c90c54e3-312d-49d8-905b-5c46e2aa49f6": [
+                "texture/bar-user3.3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ed44842b-c536-4854-833f-8b142e9799ee": [
+                "texture/bar-user3.3.png",
+                "cc.Texture2D"
+            ],
+            "cc25592b-116d-4123-a3c6-e0b4c36e5338": [
+                "texture/bot-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2cb4e792-7bd7-48b6-a06b-3e6588198778": [
+                "texture/bot-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ffe71bc6-7d24-485f-ad78-4011ee745b4d": [
+                "texture/bot-bg.jpg",
+                "cc.Texture2D"
+            ],
+            "7f52cfaf-5408-4e79-9588-305ed5ac89d6": [
+                "texture/bot-bg.png",
+                "cc.Texture2D"
+            ],
+            "86953526-781a-40fd-b776-b0b7d3d98821": [
+                "texture/bot-bg2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "0ba06f2a-ce40-4822-80b5-c3725eca9d81": [
+                "texture/bot-bg2.png",
+                "cc.Texture2D"
+            ],
+            "81c65e35-ddd5-4cc2-91ea-e874925a496c": [
+                "texture/bot_bg1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "3da1cf29-7631-48c9-bbec-7ef9f4216328": [
+                "texture/bot_bg1.jpg",
+                "cc.Texture2D"
+            ],
+            "a06c99bc-14cc-4686-be01-6b50140d0877": [
+                "texture/btn-back",
+                "cc.SpriteFrame",
+                1
+            ],
+            "24d0c965-300e-4f6f-9dce-bb726ddc32c8": [
+                "texture/btn-back.png",
+                "cc.Texture2D"
+            ],
+            "801cd0bb-63c6-45a2-aea5-9911658a0922": [
+                "texture/cel-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "07865449-314f-4d72-ac29-1768c9637d87": [
+                "texture/cel-bg.png",
+                "cc.Texture2D"
+            ],
+            "d0c85701-d464-473b-92f6-6fab6083d686": [
+                "texture/close",
+                "cc.SpriteFrame",
+                1
+            ],
+            "98943c89-7695-45b9-b83c-27a0d3282631": [
+                "texture/close.png",
+                "cc.Texture2D"
+            ],
+            "d13324ef-6a6c-4237-9ddc-866ea68871c9": [
+                "texture/con-user1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "9e1c0ec9-6ee2-4fb8-8255-43204ef2c90a": [
+                "texture/con-user1.png",
+                "cc.Texture2D"
+            ],
+            "a338396a-6b5d-4975-8eca-3d42d0e11977": [
+                "texture/con-user2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ba427ccf-ec82-435f-9ffd-9494c7c988dd": [
+                "texture/con-user2.png",
+                "cc.Texture2D"
+            ],
+            "6fb7a8e0-7282-468c-9d5e-c4fcebda9147": [
+                "texture/cpm-logo",
+                "cc.SpriteFrame",
+                1
+            ],
+            "25318814-21db-4e16-88ba-d9f05a40e88b": [
+                "texture/cpm-logo.png",
+                "cc.Texture2D"
+            ],
+            "3d33d9d0-888e-48e8-a246-f3fa91e4f140": [
+                "texture/cpm-logo2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "670e434f-a655-4ff8-925c-a0d9b82e030f": [
+                "texture/cpm-logo2.png",
+                "cc.Texture2D"
+            ],
+            "246d81ba-a6a3-4b73-9bed-c77d4b411b5a": [
+                "texture/dating-btn",
+                "cc.SpriteFrame",
+                1
+            ],
+            "684b07ba-e795-41ba-a85c-f7d8d5ebdc5b": [
+                "texture/dating-btn.png",
+                "cc.Texture2D"
+            ],
+            "ec06b584-8b62-46eb-a987-a0a9d8a557fc": [
+                "texture/dating-btn2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "8f7c9204-e89a-4623-afcd-85b0cd2afeea": [
+                "texture/dating-btn2.png",
+                "cc.Texture2D"
+            ],
+            "c09c9b73-48f2-4d43-8828-135a8744c16a": [
+                "texture/dating-btn3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "af622117-4631-4021-b4ec-645bef873c86": [
+                "texture/dating-btn3.png",
+                "cc.Texture2D"
+            ],
+            "8bb9d332-4f5e-4550-b649-37efd7f093f6": [
+                "texture/def-use",
+                "cc.SpriteFrame",
+                1
+            ],
+            "27e752ae-3790-495c-8b70-85fda2c277b1": [
+                "texture/def-use.png",
+                "cc.Texture2D"
+            ],
+            "b5207467-a1ef-4095-b849-23a75662cfed": [
+                "texture/def-user",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2da1ec48-4db9-4fa2-b040-b2d3dc874451": [
+                "texture/def-user-squ",
+                "cc.SpriteFrame",
+                1
+            ],
+            "0b1983c6-9c3a-42d1-9d64-bcee6ffa4aba": [
+                "texture/def-user-squ.png",
+                "cc.Texture2D"
+            ],
+            "aceb9760-2b29-4e7e-b1f9-fdc3213a3bda": [
+                "texture/def-user.png",
+                "cc.Texture2D"
+            ],
+            "bd9838f4-fc6e-433d-9c2e-151542cdd217": [
+                "texture/draw",
+                "cc.SpriteFrame",
+                1
+            ],
+            "367784b3-ed99-4ecc-966f-50bda3d632b5": [
+                "texture/draw.png",
+                "cc.Texture2D"
+            ],
+            "12c7acd2-a841-4ccc-b988-b097ad627a79": [
+                "texture/exit",
+                "cc.SpriteFrame",
+                1
+            ],
+            "92facadb-4059-4d84-96d8-9da93becc574": [
+                "texture/exit.png",
+                "cc.Texture2D"
+            ],
+            "019e10d8-4d3a-4205-a062-61f70fa2e42d": [
+                "texture/friendsRanking",
+                "cc.SpriteFrame",
+                1
+            ],
+            "23dcd8bf-3dda-4c24-9708-03169a2f627d": [
+                "texture/friendsRanking.png",
+                "cc.Texture2D"
+            ],
+            "e2138f9f-29ad-4959-8594-6e9154528c98": [
+                "texture/handcon",
+                "cc.SpriteFrame",
+                1
+            ],
+            "bce6a9fa-f2be-44ca-9457-7e9cc084e269": [
+                "texture/handcon.png",
+                "cc.Texture2D"
+            ],
+            "55f665fa-8ed0-4621-acf2-a5e5d019c6b0": [
+                "texture/home-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d1a96fd7-1458-488a-abe5-7374ee95f41a": [
+                "texture/home-bg.png",
+                "cc.Texture2D"
+            ],
+            "c3ef554e-7921-41f2-8594-93f2c1292d76": [
+                "texture/home-btn",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ceb9c142-81ee-4b74-b7e1-403090b8bf22": [
+                "texture/home-btn.png",
+                "cc.Texture2D"
+            ],
+            "2f075bed-b103-4469-bc49-97fd6ea60954": [
+                "texture/home-btn2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b0ba8081-b6cd-4fb0-9d5c-5fd2ad825c2f": [
+                "texture/home-btn2.png",
+                "cc.Texture2D"
+            ],
+            "9d2f5e25-a322-444e-a81b-73b469a0edeb": [
+                "texture/home-btn5",
+                "cc.SpriteFrame",
+                1
+            ],
+            "5d48bf3d-1a37-4483-a062-e2a34c1e9b75": [
+                "texture/home-btn5.png",
+                "cc.Texture2D"
+            ],
+            "a310f6b0-b1cc-4cb4-b4ee-80ab3a919c14": [
+                "texture/home-k",
+                "cc.SpriteFrame",
+                1
+            ],
+            "c0407134-27cc-44ec-b6fe-386ecf0a50ad": [
+                "texture/home-k.png",
+                "cc.Texture2D"
+            ],
+            "574d7ed9-5246-4cd8-8f47-b76ad0ca2f02": [
+                "texture/icon-money",
+                "cc.SpriteFrame",
+                1
+            ],
+            "47342709-c25e-4f9b-84b0-a8af0791780a": [
+                "texture/icon-money.png",
+                "cc.Texture2D"
+            ],
+            "e793e7e0-69eb-49d1-9573-c4b6c96b60bc": [
+                "texture/icon-plus",
+                "cc.SpriteFrame",
+                1
+            ],
+            "4d56cb26-8b11-47f2-a8bb-4cd44a6224f2": [
+                "texture/icon-plus.png",
+                "cc.Texture2D"
+            ],
+            "8b5f8093-0520-4c08-a211-0f166a1941e8": [
+                "texture/inviteFriends",
+                "cc.SpriteFrame",
+                1
+            ],
+            "06f91af1-1c34-4556-b73d-555cf868768e": [
+                "texture/inviteFriends.png",
+                "cc.Texture2D"
+            ],
+            "9b77dba0-1389-485f-9c32-19cf8d9db5f9": [
+                "texture/kick",
+                "cc.SpriteFrame",
+                1
+            ],
+            "dfec0f5a-9ea2-449b-a0e5-696fcca6dd08": [
+                "texture/kick.png",
+                "cc.Texture2D"
+            ],
+            "cd9deacd-594c-48f7-b0c0-0ef137ccd9e4": [
+                "texture/kuang",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2cbd9468-6aa1-45df-abc0-1a9cba2fae02": [
+                "texture/kuang.png",
+                "cc.Texture2D"
+            ],
+            "c512f09b-e0e3-45a6-a50a-952730e6044f": [
+                "texture/list-sign",
+                "cc.SpriteFrame",
+                1
+            ],
+            "8bdadb3b-974a-4a70-8060-1bf76096092c": [
+                "texture/list-sign.png",
+                "cc.Texture2D"
+            ],
+            "951d04be-ac91-493f-b686-e55da50eca0b": [
+                "texture/minus",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b3c623bf-f063-4ff3-82c0-237f46efa677": [
+                "texture/minus.png",
+                "cc.Texture2D"
+            ],
+            "2b92dbb4-a5e7-40ba-bf8a-e14d8b03cbfa": [
+                "texture/play-user1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "c21ff011-130b-4133-bb46-75fb01795ce6": [
+                "texture/play-user1.png",
+                "cc.Texture2D"
+            ],
+            "e8618dc8-f7b2-4a6d-ba16-3a21b20d63e0": [
+                "texture/play-user2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "c6e7159b-7b16-46b9-8cdc-1b33c753588d": [
+                "texture/play-user2.png",
+                "cc.Texture2D"
+            ],
+            "aa727543-f7d1-401e-998e-d923a765d30a": [
+                "texture/rank-bg2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ffbe4e45-8424-43cb-9b28-bbff33f4347e": [
+                "texture/rank-bg2.png",
+                "cc.Texture2D"
+            ],
+            "9b408954-87d8-4aa7-850c-7c90d3ff5712": [
+                "texture/rank-bg4",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b478869c-baed-4d85-b579-050fd0973452": [
+                "texture/rank-bg4.png",
+                "cc.Texture2D"
+            ],
+            "55d9a406-e65c-430f-be8a-df91cbe12de5": [
+                "texture/rank-logo",
+                "cc.SpriteFrame",
+                1
+            ],
+            "74b57a69-8e7f-41af-9779-632faaa2ff34": [
+                "texture/rank-logo.png",
+                "cc.Texture2D"
+            ],
+            "a8dcd2fc-c6c8-4316-80f2-f4fc7f35ad82": [
+                "texture/rank-num",
+                "cc.SpriteFrame",
+                1
+            ],
+            "29a7f6fb-f2d4-4b31-9a32-dc59e7fe6aa3": [
+                "texture/rank-num.png",
+                "cc.Texture2D"
+            ],
+            "5a18688b-8db6-470b-aa89-6f274eb7544c": [
+                "texture/rank-num2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "533ba2ef-a5d1-46c3-b7b9-6d992c5b23da": [
+                "texture/rank-num2.png",
+                "cc.Texture2D"
+            ],
+            "3aacd2a8-6faf-4993-9a6b-514b5a9cc18f": [
+                "texture/rank-num3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "879ce19d-a08b-486c-bcc0-2ccf80e885b0": [
+                "texture/rank-num3.png",
+                "cc.Texture2D"
+            ],
+            "088d605a-de33-465f-8804-c380f7ed3186": [
+                "texture/rank-user1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "078bb92c-6786-4150-86dc-fcfeca83955e": [
+                "texture/rank-user1.png",
+                "cc.Texture2D"
+            ],
+            "1f9a4577-865e-4dda-a111-98d6ac4b5727": [
+                "texture/rank-user2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "88267009-9427-4301-ad8d-8ecb256bee99": [
+                "texture/rank-user2.png",
+                "cc.Texture2D"
+            ],
+            "843306eb-c066-467f-9d13-2a4b93a03bf0": [
+                "texture/rank-user3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "75b7f83e-a8c0-4d3e-b25e-8b40fdf26edb": [
+                "texture/rank-user3.png",
+                "cc.Texture2D"
+            ],
+            "f856a195-a09f-4338-9836-7f4766407b09": [
+                "texture/rank-user6",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2a65b1c7-d4d8-4fd4-8be4-5cce62e961b1": [
+                "texture/rank-user6.png",
+                "cc.Texture2D"
+            ],
+            "03309ed1-97a1-49dd-be9c-90f003f82ac6": [
+                "texture/rome-gold",
+                "cc.SpriteFrame",
+                1
+            ],
+            "91bb3b94-42d7-4b65-b872-c3747bcbe966": [
+                "texture/rome-gold.png",
+                "cc.Texture2D"
+            ],
+            "c724c76e-8f26-404e-ae9e-312e105d2a70": [
+                "texture/room",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2cfed227-15ec-4f01-b3ad-fa1b26903508": [
+                "texture/room-kuang2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a4a44fb4-ac1a-421c-85d6-3d23c06a018d": [
+                "texture/room-kuang2.png",
+                "cc.Texture2D"
+            ],
+            "28c7d843-c7ef-4314-8daa-527436b0c204": [
+                "texture/room.png",
+                "cc.Texture2D"
+            ],
+            "32bff3f0-55f6-44b4-83d2-53ce9df9b0c7": [
+                "texture/roomnumber-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "60288606-49a7-4714-9b43-39243b39ef5a": [
+                "texture/roomnumber-bg.png",
+                "cc.Texture2D"
+            ],
+            "1b0565c1-770b-42a6-ac30-fca078d50b09": [
+                "texture/share-icon1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "3e645b92-07a1-4dd1-a653-d855dab6f713": [
+                "texture/share-icon1.png",
+                "cc.Texture2D"
+            ],
+            "04625ff8-6256-48d0-b01b-69fd763fe0c1": [
+                "texture/share-icon2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "2d89a7d0-3d88-4c38-8c44-22d1b543874a": [
+                "texture/share-icon2.png",
+                "cc.Texture2D"
+            ],
+            "c675e358-a47d-43b5-b4a0-6f5d54fa8412": [
+                "texture/share-icon3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "c777b469-1707-4eff-ad81-7ee37609e94a": [
+                "texture/share-icon3.png",
+                "cc.Texture2D"
+            ],
+            "d83554b6-b645-4ffc-8860-9cd5e5d3a7b9": [
+                "texture/share-icon4",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d63caa51-20eb-49b2-b4e8-47abc32f82c2": [
+                "texture/share-icon4.png",
+                "cc.Texture2D"
+            ],
+            "6a80696a-6179-4abe-8a6c-49ef975569be": [
+                "texture/share-icon5",
+                "cc.SpriteFrame",
+                1
+            ],
+            "a11f8bde-29ff-4ed3-ac2e-37b96a89cd92": [
+                "texture/share-icon5.png",
+                "cc.Texture2D"
+            ],
+            "8dc3ac01-b769-4527-9938-0e3390860eee": [
+                "texture/shuiyin",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d192589d-297a-46c7-93ba-882fd907f5c4": [
+                "texture/shuiyin.png",
+                "cc.Texture2D"
+            ],
+            "3f4d44fc-6c0c-4ef2-a157-d0be3b1c40d4": [
+                "texture/sr-bbot-bg2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "b86995c9-034a-48ef-a309-570f1d54eddf": [
+                "texture/sr-bbot-bg2.png",
+                "cc.Texture2D"
+            ],
+            "014da289-ee10-4982-b5ae-e0bfa049375b": [
+                "texture/sr-btn",
+                "cc.SpriteFrame",
+                1
+            ],
+            "9d7f2e18-f627-40e9-a6fa-e5fb6f1bac37": [
+                "texture/sr-btn.png",
+                "cc.Texture2D"
+            ],
+            "04291b3d-a91c-40ab-8da0-1b27f093ca45": [
+                "texture/sr-con-bg3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d8791bdf-03dd-4bea-99c2-1114604af0c3": [
+                "texture/sr-con-bg3.png",
+                "cc.Texture2D"
+            ],
+            "5e5b6958-94f9-45c8-8344-bcca4fd3e9d1": [
+                "texture/sr-con-light",
+                "cc.SpriteFrame",
+                1
+            ],
+            "dd112ff8-3cc3-4477-9eec-9563034c5d38": [
+                "texture/sr-con-light.png",
+                "cc.Texture2D"
+            ],
+            "24563e88-0c49-4826-b1b0-1c273addeb58": [
+                "texture/sr-con-logo",
+                "cc.SpriteFrame",
+                1
+            ],
+            "6dc29853-c804-4ea0-a4ed-4ddf2917db75": [
+                "texture/sr-con-logo.png",
+                "cc.Texture2D"
+            ],
+            "566f9d46-8d4a-4af2-9224-497ed359df6d": [
+                "texture/sr-con-lose",
+                "cc.SpriteFrame",
+                1
+            ],
+            "25017de6-dd8b-44ba-9bdd-8aa5a8a9e25f": [
+                "texture/sr-con-lose.png",
+                "cc.Texture2D"
+            ],
+            "e1f440bd-6cfd-4f7f-9f6d-ced0280aa50e": [
+                "texture/sr-con-new",
+                "cc.SpriteFrame",
+                1
+            ],
+            "6b993377-aff1-46fe-ac6c-8a47e9e93e6a": [
+                "texture/sr-con-new.png",
+                "cc.Texture2D"
+            ],
+            "10abc02e-ba04-45ea-b8d1-7e34c8c988f0": [
+                "texture/sr-rank-bg5",
+                "cc.SpriteFrame",
+                1
+            ],
+            "efed1b3f-3717-4f6f-8618-d8d7d61c69f9": [
+                "texture/sr-rank-bg5.png",
+                "cc.Texture2D"
+            ],
+            "f6961d04-95be-4754-8a3b-79034f3e499b": [
+                "texture/sr-rank-btn1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "6b93d328-9bc5-4e08-ad56-c70a21d8f466": [
+                "texture/sr-rank-btn1.png",
+                "cc.Texture2D"
+            ],
+            "00918a00-9cce-4268-9fcb-64ddff7b2e2b": [
+                "texture/sr-rank-logo1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ae9b8cee-c852-4619-a64b-4be712a8a26f": [
+                "texture/sr-rank-logo1.png",
+                "cc.Texture2D"
+            ],
+            "28ab1f9f-4f0a-455a-881a-27294b6ac982": [
+                "texture/sr-rank-logo2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "613cf81f-3832-4f87-80e5-771c15f2e6f4": [
+                "texture/sr-rank-logo2.png",
+                "cc.Texture2D"
+            ],
+            "6fbaee22-4c93-4804-89c4-bc4e2fee99fa": [
+                "texture/sr-rank-logo3",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d95c5dc9-5440-4b95-9ec9-70ee84eb91c0": [
+                "texture/sr-rank-logo3.png",
+                "cc.Texture2D"
+            ],
+            "ef929346-8e64-4571-988a-e5ddcead36e3": [
+                "texture/sr-rank-user",
+                "cc.SpriteFrame",
+                1
+            ],
+            "20096a0a-e6ab-43e7-8760-4ddd921a07d9": [
+                "texture/sr-rank-user-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "5cfcdb80-427a-4661-b04f-8f9396df47c5": [
+                "texture/sr-rank-user-bg.png",
+                "cc.Texture2D"
+            ],
+            "d085719e-c9b4-468e-b522-1556bd2e5a46": [
+                "texture/sr-rank-user.png",
+                "cc.Texture2D"
+            ],
+            "55d3df0f-f43e-4978-b10a-e7807cd6f5b4": [
+                "texture/sr-sign-user-",
+                "cc.SpriteFrame",
+                1
+            ],
+            "574f2895-17e0-40c8-9860-151d01c3e8b1": [
+                "texture/sr-sign-user-.png",
+                "cc.Texture2D"
+            ],
+            "55001f09-d254-478c-8073-e2f60cfe5d02": [
+                "texture/sr-user-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "90997e9c-c919-4d87-9398-56ef765e4f3c": [
+                "texture/sr-user-bg.png",
+                "cc.Texture2D"
+            ],
+            "8dd677fc-21b8-409c-8780-fa8780a6cb9e": [
+                "texture/startGame",
+                "cc.SpriteFrame",
+                1
+            ],
+            "f6d08263-8e2c-477a-8f0e-fb9e6997ea81": [
+                "texture/startGame.png",
+                "cc.Texture2D"
+            ],
+            "c9b2e568-7f17-4edd-8a19-8baaa29f46f4": [
+                "texture/tiaoxinlogo",
+                "cc.SpriteFrame",
+                1
+            ],
+            "35a6b453-d619-4a36-993f-69bb6bcd00bd": [
+                "texture/tiaoxinlogo.png",
+                "cc.Texture2D"
+            ],
+            "b87a0195-abc5-47e8-850c-b96ca7f565f0": [
+                "texture/ver-bot-bg2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "19fe60d1-814a-4338-ba5e-4e51a2ba528a": [
+                "texture/ver-bot-bg2.png",
+                "cc.Texture2D"
+            ],
+            "b1212c8a-abee-403f-a510-ef0da39e82f2": [
+                "texture/ver-con-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "95002b4d-89a2-42ed-821e-df2a106b4c95": [
+                "texture/ver-con-bg.png",
+                "cc.Texture2D"
+            ],
+            "f22410f5-9c3d-41ff-a7a5-9b19a5adcf6a": [
+                "texture/ver-con-light",
+                "cc.SpriteFrame",
+                1
+            ],
+            "31f39558-57c1-437c-8952-38ed3f751b56": [
+                "texture/ver-con-light.png",
+                "cc.Texture2D"
+            ],
+            "82fe928e-c17e-4705-98e2-c1b04f65a694": [
+                "texture/ver-join-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "bc94fce8-7341-48b8-89dc-0392427570b1": [
+                "texture/ver-join-bg.png",
+                "cc.Texture2D"
+            ],
+            "c410b980-3663-481d-88f1-444a039b60a2": [
+                "texture/ver-rank-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "ce72fa49-40f2-41e9-a3cb-e8c71491f0ef": [
+                "texture/ver-rank-bg.png",
+                "cc.Texture2D"
+            ],
+            "c32ee6ce-8e2e-46bb-80e4-9b6f527ee921": [
+                "texture/ver-rank-bg1",
+                "cc.SpriteFrame",
+                1
+            ],
+            "8f2b0d93-4ca6-4a86-85fe-6c6ccd83b60e": [
+                "texture/ver-rank-bg1.png",
+                "cc.Texture2D"
+            ],
+            "9c306dd5-306e-40c4-a1ba-5851dd035ecc": [
+                "texture/ver-rank-bg2",
+                "cc.SpriteFrame",
+                1
+            ],
+            "1f93c5a3-be08-49a8-b817-2557507069e5": [
+                "texture/ver-rank-bg2.png",
+                "cc.Texture2D"
+            ],
+            "53146f75-cd8e-48d8-aa61-87389d690c6f": [
+                "texture/ver-rank-bg4",
+                "cc.SpriteFrame",
+                1
+            ],
+            "d96fbae4-7967-4d13-b939-76ad93cc14c3": [
+                "texture/ver-rank-bg4.png",
+                "cc.Texture2D"
+            ],
+            "9fedaf86-f021-43b0-ab58-acad66d97de7": [
+                "texture/ver-rank-bg5",
+                "cc.SpriteFrame",
+                1
+            ],
+            "82e0590c-c226-44f2-92a3-10fd38901ce9": [
+                "texture/ver-rank-bg5.png",
+                "cc.Texture2D"
+            ],
+            "608a927c-2dbb-4e03-b3b5-740cd3e7de22": [
+                "texture/ver-user-bg",
+                "cc.SpriteFrame",
+                1
+            ],
+            "0a73a4e4-ca89-436a-9fac-77d192704766": [
+                "texture/ver-user-bg.png",
+                "cc.Texture2D"
+            ],
+            "23ca5fde-f2ea-4f97-99bc-91f573bab5e3": [
+                "texture/vs",
+                "cc.SpriteFrame",
+                1
+            ],
+            "856839cf-5fba-41e8-b90c-ee7dada1e1b5": [
+                "texture/vs.png",
+                "cc.Texture2D"
+            ],
+            "cadc7381-e8ff-485e-ab4b-0440028da12b": [
+                "texture/worldRanking",
+                "cc.SpriteFrame",
+                1
+            ],
+            "4dab00d7-6dfe-493b-bb73-10db3d98923c": [
+                "texture/worldRanking.png",
+                "cc.Texture2D"
+            ],
+            "2a0c05cb-a7d7-4086-8162-6a2409d9d885": [
+                "texture/yuan",
+                "cc.SpriteFrame",
+                1
+            ],
+            "13bc3be7-834c-4a65-9894-14d4760edf74": [
+                "texture/yuan.png",
+                "cc.Texture2D"
+            ],
+            "7c2d1142-1c04-421b-92f9-5dcb965d0fae": [
+                "ui/blueAdd1.prefab",
+                "cc.Prefab"
+            ],
+            "d2e47e7f-faef-4d3a-a6e6-e28ab6dd78b6": [
+                "ui/blueReduction2.prefab",
+                "cc.Prefab"
+            ],
+            "1bfe55d9-c8c7-45bd-b868-de47412117d2": [
+                "ui/key_countdown.prefab",
+                "cc.Prefab"
+            ],
+            "88ac259c-09e5-48d9-b1ee-521d173eb466": [
+                "ui/key_readyGo.prefab",
+                "cc.Prefab"
+            ],
+            "0f7defa9-d311-4e5d-b681-ca6c8652e056": [
+                "ui/redAdd1.prefab",
+                "cc.Prefab"
+            ],
+            "a4c12a8a-d100-4a27-8fd1-06ac523a6057": [
+                "ui/redReduction2.prefab",
+                "cc.Prefab"
+            ],
+            "1750f17c-aaff-48be-99bf-72727bb8166b": [
+                "ui/uiExit.prefab",
+                "cc.Prefab"
+            ],
+            "e076c325-6e6b-41ce-9aaa-342bcac57402": [
+                "ui/uiGamePanel.prefab",
+                "cc.Prefab"
+            ],
+            "2aed1ed9-add7-4c87-b51a-b753d8978bcf": [
+                "ui/uiLobbyPanel.prefab",
+                "cc.Prefab"
+            ],
+            "bc11d099-b78d-4c5a-9bb7-643ed8a487c4": [
+                "ui/uiLogin.prefab",
+                "cc.Prefab"
+            ],
+            "8d844406-e950-4f57-a78d-c89587ed7d0d": [
+                "ui/uiMaskLayout.prefab",
+                "cc.Prefab"
+            ],
+            "70f13a21-2a60-4924-8be6-4c802ae346db": [
+                "ui/uiMatching1v1Ver.prefab",
+                "cc.Prefab"
+            ],
+            "9d9420b0-61ef-482e-a2bd-426b5b0e332f": [
+                "ui/uiMatchingVer.prefab",
+                "cc.Prefab"
+            ],
+            "e0ab37ba-3b34-4b7e-8e7b-52d67975bbd2": [
+                "ui/uiRankPanelVer.prefab",
+                "cc.Prefab"
+            ],
+            "63d42f36-09b3-4c78-847c-ed201f58b3fd": [
+                "ui/uiRoomListVer.prefab",
+                "cc.Prefab"
+            ],
+            "db29b85e-8a5a-4f1a-8627-d91a699111d8": [
+                "ui/uiRoomVer.prefab",
+                "cc.Prefab"
+            ],
+            "86407e2d-e469-424d-8962-458c2224dd40": [
+                "ui/uiRoundTip.prefab",
+                "cc.Prefab"
+            ],
+            "b7001c12-97f6-41a6-acdd-9fa8ebba31c0": [
+                "ui/uiTip.prefab",
+                "cc.Prefab"
+            ],
+            "8145e342-f980-4725-9ed2-cc5aefc4a9c5": [
+                "ui/uiVsResultVer.prefab",
+                "cc.Prefab"
+            ]
+        }
+    },
+    jsList: [
+        "assets/common/script/basic/protocol.js",
+        "assets/common/script/basic/rankNetwork/ProtoBuf.js"
+    ],
+    launchScene: "db://assets/game.fire",
+    scenes: [
+        {
+            url: "db://assets/game.fire",
+            uuid: "c6025f3d-80a1-41c8-bfcb-132e6c4c23a4"
+        },
+        {
+            url: "db://assets/lobby.fire",
+            uuid: "79146b76-f001-46c3-9f85-5e013f21b436"
+        }
+    ],
+    packedAssets: {},
+    md5AssetsMap: {},
+    debug: true
+};

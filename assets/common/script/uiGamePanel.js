@@ -61,14 +61,14 @@ cc.Class({
         this.readyAnim = this.readyNode.getComponent(cc.Animation);
         this.readyAnim.on('finished', this.notifyReady, this);
 
+        //this.readyGoAudio = this.readyNode.getComponent(cc.AudioSource);
+
         clientEvent.on(clientEvent.eventType.updateTime, this.updateTime, this);
         clientEvent.on(clientEvent.eventType.countTime, this.countTime, this);
         clientEvent.on(clientEvent.eventType.changeFlag, this.changeFlag, this);
         clientEvent.on(clientEvent.eventType.roundStart, this.roundStart, this);
         clientEvent.on(clientEvent.eventType.gameOver, this.gameOver, this);
         clientEvent.on(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
-
-        this.readyGoAudio = this.readyNode.getComponent(cc.AudioSource);
     },
 
     gameOver () {
@@ -193,7 +193,7 @@ cc.Class({
     //----------------------------------------------------------------------
     playReadyGo() {
         this.readyAnim.play();
-        this.readyGoAudio.play();
+        //this.readyGoAudio.play();
     },
 
     playTimeWarnAnim () {
@@ -237,7 +237,8 @@ cc.Class({
     },
 
     //收到发牌消息,游戏开始
-    gameStart: function(){
+    gameStart (){
+        console.log("uiGamePanel", "gameStart")
         Game.GameManager.gameState = GameState.Play;
 
         //初始化红蓝头像 初始化箭头等红蓝信息 自己在左侧
@@ -252,11 +253,11 @@ cc.Class({
         //初始化棋盘
 
         //播放readygo动画完成之后开始回合的通知
-        tihs.playReadyGo()
+        this.playReadyGo()
     },
 
     //read go 之后开始通知服务器客户端准备完成
-    notifyReady: function(){
+    notifyReady (){
         nano.notify("game.QiPaiFinished", {}) 
     },
 });

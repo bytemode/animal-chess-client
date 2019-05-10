@@ -7,12 +7,17 @@ cc.Class({
             type: cc.Sprite
         }
     },
+
+    onLoad: function(){
+        clientEvent.on(clientEvent.eventType.playerAccountGet, this.userInfoSet, this);
+    },
+
     setData: function(userInfo) {
         this.userInfo = userInfo;
         this.playerId = userInfo.id ? userInfo.id : userInfo.userId;
         this.playerSprite.node.active = true;
-        clientEvent.on(clientEvent.eventType.playerAccountGet, this.userInfoSet, this);
-        Game.GameManager.userInfoReq(this.playerId);
+
+        //请求用户头像
     },
 
     userInfoSet: function(recvMsg) {

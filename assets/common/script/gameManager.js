@@ -64,7 +64,7 @@ cc.Class({
         }.bind(this));
 
         //发牌消息
-        nano.on("onDuanPai", this.startGame.bind(this))
+        nano.on("onDuanPai", this.onDuanPai.bind(this))
 
         //提示玩家出牌
         nano.on("onHintPlayer", this.onHintPlayer.bind(this))
@@ -83,15 +83,15 @@ cc.Class({
     },
 
     //开始游戏发牌
-    startGame: function(data) {
-        console.log("startGame", data)
+    onDuanPai: function(data) {
+        console.log("onDuanPai", data)
         this.logic.initFaPai(data)
 
         //加载游戏场景
         cc.director.loadScene('game', function() {
             uiFunc.openUI("uiGamePanel", function(panel) {
                 //初始化游戏包括敌我双向 棋盘信息
-                panel.getComponent("uiGamePanel").gameStart();                
+                panel.getComponent("uiGamePanel").gameStart();
             }.bind(this));
         }.bind(this));
     },
