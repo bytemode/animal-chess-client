@@ -46,7 +46,9 @@ window.clientEvent = {
         onEatPiece: "onEatPiece",
         onShowEnjoy: "onShowEnjoy", //聊天表情
         onGameEnd: "onGameEnd",
+        InitMap: "InitMap", //初始化棋盘
     },
+
     eventListener: null
 }
 

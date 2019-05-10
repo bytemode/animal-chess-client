@@ -251,9 +251,15 @@ cc.Class({
         this.timeLabelInit()
 
         //初始化棋盘
+        this.initPieces()
 
         //播放readygo动画完成之后开始回合的通知
         this.playReadyGo()
+    },
+
+    //初始化棋子
+    initPieces (){
+        clientEvent.dispatch(clientEvent.eventType.InitMap);
     },
 
     //read go 之后开始通知服务器客户端准备完成

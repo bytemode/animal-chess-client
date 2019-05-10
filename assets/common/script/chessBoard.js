@@ -17,15 +17,15 @@ cc.Class({
         this.fPosList = [];
         this.playing = false;
 
-        clientEvent.on(clientEvent.eventType.mapInit, this.mapInitEvent, this);
-        clientEvent.on(clientEvent.eventType.eatForChess, this.eatForChessEvent, this)
-        clientEvent.on(clientEvent.eventType.eatForOther, this.eatForOther, this);
-        clientEvent.on(clientEvent.eventType.openForOther, this.openForOther, this);
-        clientEvent.on(clientEvent.eventType.openChessPiece, this.openChessPieceEvent, this);
-        clientEvent.on(clientEvent.eventType.checkMoveDirection, this.checkMoveDirection, this);
-        clientEvent.on(clientEvent.eventType.isGameOver, this.isGameOver, this);
-        clientEvent.on(clientEvent.eventType.getMap, this.getMap, this);
-        clientEvent.on(clientEvent.eventType.gameOver, this.overClear, this);
+        clientEvent.on(clientEvent.eventType.InitMap, this.initMap, this);
+        //clientEvent.on(clientEvent.eventType.eatForChess, this.eatForChessEvent, this)
+        //clientEvent.on(clientEvent.eventType.eatForOther, this.eatForOther, this);
+        //clientEvent.on(clientEvent.eventType.openForOther, this.openForOther, this);
+        //clientEvent.on(clientEvent.eventType.openChessPiece, this.openChessPieceEvent, this);
+        //clientEvent.on(clientEvent.eventType.checkMoveDirection, this.checkMoveDirection, this);
+        //clientEvent.on(clientEvent.eventType.isGameOver, this.isGameOver, this);
+        //clientEvent.on(clientEvent.eventType.getMap, this.getMap, this);
+        //clientEvent.on(clientEvent.eventType.gameOver, this.overClear, this);
     },
 
     init () {
@@ -753,7 +753,7 @@ cc.Class({
     },
 
     onDestroy () {
-        clientEvent.off(clientEvent.eventType.mapInit, this.mapInitEvent, this);
+        clientEvent.off(clientEvent.eventType.InitMap, this.initMap, this);
         clientEvent.off(clientEvent.eventType.eatForChess, this.eatForChessEvent, this)
         clientEvent.off(clientEvent.eventType.eatForOther, this.eatForOther, this);
         clientEvent.off(clientEvent.eventType.openForOther, this.openForOther, this);
@@ -772,5 +772,24 @@ cc.Class({
     clickPieceCallback: function( event, customEventData ){
         console.log(event.target, customEventData)
 
+    },
+
+    //初始化棋盘
+    initMap: function(){
+        //获取地图数据 进行界面初始化
+        var pieces = Game.GameManager.logic.getPieces()
+        for(var i = 1; i < 17; i++){
+            //pieces[i]
+            var piecesB = this.node.getChildByName("piece_" + i.toString())
+
+            var chessNode = pool.getPrefab(this.chess.name);
+            this.node.addChild(chessNode);
+            chessNode.setPosition(cc.v2(piecesB.x, piecesB.y));
+
+            //chessNode.sign = showChessInfo[j].sign;
+            //var chessScript = chessNode.getComponent(this.chess.name);
+            //this.showChessArr.push(chessNode);
+            //chessScript.setChessType(showChessInfo[j].type, showChessInfo[j].index);
+        }
     }
 });
