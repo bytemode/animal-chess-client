@@ -29,10 +29,8 @@ cc.Class({
             this.players.push(roomUserInfo);
         }
 
-        //加入房间的通知
-        nano.on("onPlayerEnter", this.joinRoomNotify.bind(this))
-
         clientEvent.on(clientEvent.eventType.onDuanPai, this.onDuanPai, this);
+        clientEvent.on(clientEvent.eventType.onPlayerEnter, this.joinRoomNotify, this)
     },
 
     onDestroy() {
@@ -43,18 +41,19 @@ cc.Class({
     createRoomInit: function(data) {
         this.roomId = data.roomID;
         this.ownerId = data.owner;
-        this.players[0].setData(this.ownerId, this.ownerId);
-        GLB.isRoomOwner = true;
         this.txtRoomID.string = this.roomId
+        this.players[0].setData({uid: Game.GameManager.uid, name: Game.GameManager.nickName, headURL: Game.GameManager.headUrl }); //uid name headurl
+        GLB.isRoomOwner = true;
     },
 
     joinRoomInit: function(data){
         this.roomId = data.roomID;
         this.ownerId = data.owner;
-        this.players[0].setData(this.ownerId, this.ownerId);
+
+        this.players[0].setData({uid: Game.GameManager.uid, name: Game.GameManager.nickName, headURL: Game.GameManager.headUrl }); //uid name headurl
         GLB.isRoomOwner = false;
-        this.txtRoomID.string = this.roomId
-        this.players[1].setData(GLB.userInfo.id, this.ownerId);
+
+        this.players[1].setData({uid: this.ownerId, name: ""});
     },
 
     //离开房间
@@ -79,11 +78,12 @@ cc.Class({
     },
 
     //加入房间的通知
-    joinRoomNotify: function(data) {
-        console.log(data)
-        for (var j = 0; j < data.data.length; j++) {
-            this.players[j].userId = data.data[j].acId
-            this.players[j].setData(data.data[j].acId, this.ownerId);
+    joinRoomNotify: function() {
+        console.log("joinRoomNotify")
+
+        var players = Game.GameManager.logic.getPlayerData()
+        for (var j = 0; j < players.length; j++) {
+            this.players[j].setData(players[j]);
         }
     },
 

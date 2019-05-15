@@ -29,6 +29,7 @@ cc.Class({
                 }
             }.bind(this));
         }
+        clientEvent.on(clientEvent.eventType.onDuanPai, this.onDuanPai, this);
     },
 
     rank: function() {
@@ -56,12 +57,6 @@ cc.Class({
                 "game": "game8"
             });
         }
-    },
-
-    exit: function() {
-        //mvs.engine.logout("");
-        uiFunc.closeUI(this.node.name);
-        this.node.destroy();
     },
 
     onEnable() {
@@ -126,6 +121,14 @@ cc.Class({
     },
 
     //------------------------------------------------------------------------------------------------
+    onDuanPai: function() {
+        this.exit()
+    },
+
+    exit: function() {
+        uiFunc.closeUI(this.node.name);
+        this.node.destroy();
+    },
 
     //创建房间
     createRoom: function() {

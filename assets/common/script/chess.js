@@ -4,92 +4,82 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        bgColor: [cc.SpriteFrame],
-        blueChessPiecesArr: [cc.SpriteFrame],
-        redChessPiecesArr: [cc.SpriteFrame]
+        chessPiecesArr: [cc.SpriteFrame], //棋子图片 1~8 是红色 9~16是蓝色
     },
 
     onLoad () {
-        this.chessNode = this.node.getChildByName('chessNode');
-        this.yanwuNode = this.node.getChildByName('yanwu');
+        ////背景
         this.backImgNode = this.node.getChildByName('backImg');
-        this.leftNode = this.node.getChildByName('left');
-        this.rightNode = this.node.getChildByName('right');
-        this.upNode = this.node.getChildByName('up');
-        this.downNode = this.node.getChildByName('down');
-        // clientEvent.on(clientEvent.eventType.openChessPiece, function (tag) {
-        //     if (this.node.tag !== tag) return;
-        //     this.openChessPiece();
-        // }.bind(this))
-        clientEvent.on(clientEvent.eventType.openChessPiece, this.openChessPieceEvent, this);
-        this.leftNode.active = false;
-        this.rightNode.active = false;
-        this.upNode.active = false;
-        this.downNode.active = false;
-        this.yanwuNode.active = false;
-        this.isOpen = false;
-        this.isMoving = false;
+
+        //四个箭头
+        this.leftNode   = this.node.getChildByName('left');
+        this.rightNode  = this.node.getChildByName('right');
+        this.upNode     = this.node.getChildByName('up');
+        this.downNode   = this.node.getChildByName('down');
+
+        //烟雾
+        this.yanwuNode = this.node.getChildByName('yanwu');
+
+        this.chessNode = this.node.getChildByName('chessNode');
+        //棋子icon
+        this.chessPieceNode = this.chessNode.getChildByName('chessPiece');
+
+
+        this.leftNode.active    = false;
+        this.rightNode.active   = false;
+        this.upNode.active      = false;
+        this.downNode.active    = false;
+        this.yanwuNode.active   = false;
+        this.chessNode.active   = false;
+        this.backImgNode.active = true;
+
+        this.isOpen             = false;
+        this.isMoving           = false;
+        this.type               = -1;
+        this.camp               = 0;
     },
 
-    setChessType:function (type,index) {
-       this.chessPieceNode = this.node.getChildByName('chessNode').getChildByName('chessPiece');
-        // if (index % 10 === 8) {
-        //     this.chessPieceNode.x += 10;
-        //     this.chessPieceNode.y += 20;
-        // } else if (index % 10 === 7) {
-        //     this.chessPieceNode.x -= 5;
-        //     this.chessPieceNode.y += 20;
-        // } else if (index % 10 === 6) {
-        //     this.chessPieceNode.y += 12;
-        // } else if (index % 10 === 5) {
-        //     this.chessPieceNode.y += 15;
-        // }
-        if(type === GLB.PLAYER_FLAG.BLUE)
-        {
+    setIndex: function(pos) {
+        this.pos  = pos  //棋牌位置
+    },
+
+    //设置棋子数据 位置和值
+    setChessType: function (type) {
+        this.type = type //棋子的值
+        
+        if(type > 0 ) {
+            this.node.active = true
+
+            //设置棋子
             this.chessPieceNode.setScale(1);
-            this.chessPieceNode.getComponent(cc.Sprite).spriteFrame = this.blueChessPiecesArr[index-1];
-
+            this.camp = Game.GameManager.logic.getCampByType(type) //阵营
+            this.chessPieceNode.getComponent(cc.Sprite).spriteFrame = this.chessPiecesArr[type-1]; //设置图片
         }
-        else if(type === GLB.PLAYER_FLAG.RED){
-            this.chessPieceNode.setScale(1);
-            this.chessPieceNode.getComponent(cc.Sprite).spriteFrame = this.redChessPiecesArr[index-10-1];
+        else if(type == 0){
+            this.node.active = false
         }
-
-        this.type = type;
-        this.index = index - 1;
+        else if(type == -1){
+            //未翻开
+            this.node.active = true
+            this.backImgNode.active = true;
+        }
     },
 
-    openChessPieceEvent (tag) {
-        if (this.node.sign !== tag) return;
-        this.openChessPiece();
-    },
-
+    //翻开棋子 需要先设置棋子数据 然后才可以翻棋子
     openChessPiece:function () {
-        //  播放音乐
-        user.setAudio(this.index % 10);
-        user.stepIfEatOrOpen(2);
-        this.backImgNode.getComponent(cc.Animation).play("openAnm").on("finished",function() {
+        // 播放音乐
+        user.setAudio((this.type - 1) % 8);
+
+        //播放翻开时底部动画 
+        this.backImgNode.getComponent(cc.Animation).play("openAnm").on("finished", function() {
+            //完成之后隐藏底部动画 显示棋子节点播放云动画
+            this.isOpen = true
+
             this.backImgNode.active = false;
             this.chessNode.active = true;
             this.yanwuNode.active = true;
             this.yanwuNode.getComponent(cc.Animation).play("yanwu");
         }.bind(this));
-
-        // TODO 第一次翻棋
-        // if (user.fristFilpChess === 1) {//第一次翻棋
-        //     if (this.index <= 10) {
-        //         user.isBlue = true;
-        //     } else {
-        //         user.isBlue = false;
-        //     }
-        //     user.fristFilpChess = 0;
-        //     clientEvent.dispatchEvent("changeColor", user.isBlue);
-        //     user.sendGameData(user.gameDataProto.firstFlipChess, {isBlue:user.isBlue});
-        // }
-
-        setTimeout(function() {
-            clientEvent.dispatch("isGameOver");
-        }.bind(this), 1000);
     },
 
     setPosition: function(x, y) {
@@ -105,7 +95,11 @@ cc.Class({
     },
 
     getIndex:function() {
-        return this.index + 1;
+        return this.pos;
+    },
+
+    getType:function(){
+        return this.type;
     },
 
     getAnimateStep:function() {
@@ -114,6 +108,7 @@ cc.Class({
                 return true
             }
         }
+
         if (this.putDown) {
             if (this.putDown.isPlaying === true) {
                 return true
@@ -123,120 +118,97 @@ cc.Class({
     },
 
     clearDirection:function() {
-        // this.leftNode = this.node.getChildByName('left');
-        // this.rightNode = this.node.getChildByName('right');
-        // this.upNode = this.node.getChildByName('up');
-        // this.downNode = this.node.getChildByName('down');
-        this.node.zIndex = 0;
-        this.leftNode.active = false;
-        this.rightNode.active = false;
-        this.upNode.active = false;
-        this.downNode.active = false;
-
+        this.node.zIndex        = 0;
+        this.leftNode.active    = false;
+        this.rightNode.active   = false;
+        this.upNode.active      = false;
+        this.downNode.active    = false;
     },
 
-    setMoveDirection:function (data, cb) {
-        this.pickUp = this.chessNode.getComponent(cc.Animation).play("pickUp");
-        // this.leftNode = this.node.getChildByName('left');
-        // this.rightNode = this.node.getChildByName('right');
-        // this.upNode = this.node.getChildByName('up');
-        // this.downNode = this.node.getChildByName('down');
-        this.node.zIndex = 100;
-        if(data.left)
-        {
+    setMoveDirection:function (data) { //left  right up down
+        if(data.left){
             this.leftNode.active = data.left;
             if(data.largeThanleft)
             {
                 this.leftNode.color = new cc.color("#FFFFFF");
-                // this.widget["left"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(canDownUrl));
             }
             else{
                 this.leftNode.color = new cc.color("#FF4E4E");
-                // this.widget["left"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(notDownUrl));
             }
         }
-        if(data.right)
-        {
+
+        if(data.right){
             this.rightNode.active = data.right;
             if(data.largeThanright)
             {
                 this.rightNode.color = new cc.color("#FFFFFF");
-                // this.widget["right"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(canDownUrl));
             }
             else{
                 this.rightNode.color = new cc.color("#FF4E4E");
-                // this.widget["right"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(notDownUrl));
             }
         }
-        if(data.up)
-        {
+
+        if(data.up){
             this.upNode.active = data.up;
             if(data.largeThanup)
             {
                 this.upNode.color = new cc.color("#FFFFFF");
-                // this.widget["up"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(canDownUrl));
             }
             else{
                 this.upNode.color = new cc.color("#FF4E4E");
-                // this.widget["up"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(notDownUrl));
             }
         }
-        if(data.down)
-        {
+
+        if(data.down){
             this.downNode.active = data.down;
             if(data.largeThandown)
             {
                 this.downNode.color = new cc.color("#FFFFFF");
-                // this.widget["down"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(canDownUrl));
             }
             else{
                 this.downNode.color = new cc.color("#FF4E4E");
-                // this.widget["down"].getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(cc.url.raw(notDownUrl));
             }
-        }
-        if (cb) {
-            cb();
         }
     },
 
-    animatPutDown:function(cb,parm) {
-        if (this.chessNode.scale === 1.2) {
-            this.putDown  = this.chessNode.getComponent(cc.Animation).play("putDown").once("finished",function() {
-                if (parm) {
-                    cb();
-                    return;
-                }
-                if (!cb) {
-                    return;
-                }
-                this.yanwuNode.active = true;
-                this.yanwuNode.getComponent(cc.Animation).play("yanwu").once("finished",function() {
-                    this.yanwuNode.active = false;
-                    if (cb) {
-                        cb();
-                    }
-                }.bind(this));
-            }.bind(this));
-        } else {
+    animatPickup: function(cb) {
+        this.node.zIndex = 100;
+        this.pickUp = this.chessNode.getComponent(cc.Animation).play("pickUp").once("finished",function() {
+            if(cb) {
+                cb();
+            }
+        }.bind(this))
+    },
 
+    animatPutDown:function(cb) {
+        this.putDown  = this.chessNode.getComponent(cc.Animation).play("putDown").once("finished",function() {
+            this.clearDirection()
+
+            this.yanwuNode.active = true;
+            this.yanwuNode.getComponent(cc.Animation).play("yanwu").once("finished",function() {
+                this.yanwuNode.active = false;
+                if (cb) {
+                    cb();
+                }
+            }.bind(this));
+        }.bind(this));
+    },
+
+    animationYanwu: function(cb){
+        this.yanwuNode.active = true;
+        this.yanwuNode.getComponent(cc.Animation).play("yanwu").once("finished",function() {
+            this.yanwuNode.active = false;
             if (cb) {
                 cb();
             }
-
-        }
+        }.bind(this));
     },
 
     setDestory:function(){
+        this.isOpen = false
         this.node.active = false;
     },
 
-    start () {
-
-    },
-
     onDestroy () {
-        clientEvent.off(clientEvent.eventType.openChessPiece, this.openChessPieceEvent, this);
     }
-
-    // update (dt) {},
 });

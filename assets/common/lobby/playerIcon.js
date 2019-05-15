@@ -14,7 +14,7 @@ cc.Class({
 
     setData: function(userInfo) {
         this.userInfo = userInfo;
-        this.playerId = userInfo.id ? userInfo.id : userInfo.userId;
+        this.playerId = userInfo.uid
         this.playerSprite.node.active = true;
 
         //请求用户头像

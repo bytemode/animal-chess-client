@@ -49,6 +49,8 @@ cc.Class({
         this.timeNode = this.node.getChildByName('time');
         this.timeLeftNode = this.timeNode.getChildByName('left'); //我方
         this.timeRightNode = this.timeNode.getChildByName('right'); //他仿
+        this.timeLeftNode.active = false
+        this.timeRightNode.active = false
 
         //倒计时
         this.timeNumNode = this.timeNode.getChildByName('num');
@@ -63,12 +65,10 @@ cc.Class({
 
         //this.readyGoAudio = this.readyNode.getComponent(cc.AudioSource);
 
-        clientEvent.on(clientEvent.eventType.updateTime, this.updateTime, this);
-        clientEvent.on(clientEvent.eventType.countTime, this.countTime, this);
-        clientEvent.on(clientEvent.eventType.changeFlag, this.changeFlag, this);
-        clientEvent.on(clientEvent.eventType.roundStart, this.roundStart, this);
-        clientEvent.on(clientEvent.eventType.gameOver, this.gameOver, this);
+        clientEvent.on(clientEvent.eventType.onHintPlayer, this.onHintPlayer, this);
         clientEvent.on(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
+        clientEvent.on(clientEvent.eventType.onShowEnjoy, this.onShowEnjoy, this);
+        clientEvent.on(clientEvent.eventType.onGameEnd, this.onGameEnd, this);
     },
 
     gameOver () {
@@ -77,120 +77,57 @@ cc.Class({
         clearInterval(this.interval);
     },
 
-    setTimeNumFont () {
-        this.timeNumLabel.fontSize = 35;
-    },
-
-    roundStart () {
-        console.log('------roundStart------')
-        this.timeLabelInit();
-        clearInterval(this.interval);
-        this.playerFlag = GLB.PLAYER_FLAG.RED;
-        user.init();
-        this.headColorInit();
-        clientEvent.dispatch(clientEvent.eventType.getMap);
-        this.playReadyGo();
-        this.setTimeNumFont();
-        this.setHeadIcon();
-    },
 
     exit() {
         uiFunc.openUI("uiExit");
     },
 
-    countTime () {
+    onDestroy () {
+        console.log('uiGamePanel onDestroy');
         clearInterval(this.interval);
-        if (!GLB.isRoomOwner || Game.GameManager.gameState !== GameState.Play) return;
-        this.time = 30;
-        this.countDownEvent();
-        this.interval = setInterval(function() {
-            this.time--;
-            this.countDownEvent();
-            if (this.time <= 0) {
-                if (Game.GameManager.gameState === GameState.Play) {
-                    console.log('超时；获胜方====' + (this.playerFlag === GLB.PLAYER_FLAG.RED ? '蓝色':'红色'));
-                    var winFlag = this.playerFlag === GLB.PLAYER_FLAG.RED ? GLB.PLAYER_FLAG.BLUE : GLB.PLAYER_FLAG.RED
-                    // Game.GameManager.gameState = GameState.Over;
-                    var msg = {
-                        action: GLB.GAME_OVER_EVENT,
-                        winFlag: winFlag
-                    }
-                    Game.GameManager.sendEvent(msg);
-                    clientEvent.dispatch(clientEvent.eventType.gameOver, winFlag);
-                }
-                clearInterval(this.interval);
-                this.interval = null;
+        clientEvent.off(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
+    },
 
+    countTime () {
+        if(this.interval) {
+            clearInterval(this.interval);
+            this.interval = null;
+        }
+
+        if (Game.GameManager.gameState !== GameState.Play) return;
+
+        this.time = 30;
+        this.interval = setInterval(function(){
+            console.log("countTime", this.time)
+            if (Game.GameManager.gameState == GameState.Play){
+                this.time--;
+                if (this.time <= 0) {
+                    clearInterval(this.interval);
+                    this.interval = null;
+                }
+                this.updateTime(this.time)
             }
         }.bind(this), 1000);
     },
 
-    changeFlag () {
-        this.playerFlag === GLB.PLAYER_FLAG.RED ? this.playerFlag = GLB.PLAYER_FLAG.BLUE :this.playerFlag = GLB.PLAYER_FLAG.RED;
-        this.getTurn(this.playerFlag);
-        if (user.isMyTurn) {
-            uiFunc.openUI('uiRoundTip', function (panel) {
-                var uiRoundTip = panel.getComponent('uiRoundTip');
-                uiRoundTip.setData(GLB.ROUND_TIP.SELF);
-            })
-        }
-        this.countTime();
-    },
 
-    getTurn (flag) {
-        // var flag = this.playerFlag;
-        var preTurn = user.isMyTurn;
-        if(GLB.isRoomOwner && flag === GLB.PLAYER_FLAG.RED) {
-            user.isMyTurn = true;
-        } else if(!GLB.isRoomOwner && flag === GLB.PLAYER_FLAG.BLUE){
-            user.isMyTurn = true;
-        } else {
-            user.isMyTurn = false;
-        }
-        if (preTurn === user.isMyTurn) return;
-        this.showCurTurnLabel();
-        this.timeNode.active = true;
-    },
-
-    //显示回合信息
-    showCurTurnLabel () {
-        if (user.isMyTurn) {
-            this.timeLeftNode.active = true;
-            this.timeRightNode.active = false;
-        } else {
-            this.timeLeftNode.active = false;
-            this.timeRightNode.active = true;
-        }
-    },
-
-    updateTime (param) {
-        // if (Game.GameManager.gameState !== GameState.Play) return;
-        var side = null;
-        var time = param.time;
-        if (time <= 5 && time > 0) {
+    updateTime (time) {
+        if (time == 5) {
             this.playTimeWarnAnim();
         }
+
         if (time <= 0) {
             this.stopTimeWarnAnim();
         }
-        this.getTurn(param.flag);
-        user.isMyTurn ? side = 'Left' : side = 'Right';
+
+        this.timeNode.active = true;
         this.timeNumLabel.string = time;
     },
 
-    onDestroy () {
-        console.log('uiGamePanel onDestroy');
-        clearInterval(this.interval);
-        clientEvent.off(clientEvent.eventType.updateTime, this.updateTime, this);
-        clientEvent.off(clientEvent.eventType.countTime, this.countTime, this);
-        clientEvent.off(clientEvent.eventType.changeFlag, this.changeFlag, this);
-        clientEvent.off(clientEvent.eventType.roundStart, this.roundStart, this);
-        clientEvent.off(clientEvent.eventType.gameOver, this.gameOver, this);
-        clientEvent.off(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
+    setTimeNumFont () {
+        this.timeNumLabel.fontSize = 35;
     },
 
-
-    //----------------------------------------------------------------------
     playReadyGo() {
         this.readyAnim.play();
         //this.readyGoAudio.play();
@@ -208,7 +145,7 @@ cc.Class({
     timeLabelInit () {
         this.timeNode.active = false;
         this.timeNumLabel.string = 30;
-        this.timeNode.getChildByName('num').setScale(1, 1);
+        //this.timeNode.getChildByName('num').setScale(1, 1);
     },
 
     //初始化头像信息
@@ -231,10 +168,22 @@ cc.Class({
     },
 
     //设置头像
-    setHeadIcon () {
-        this.leftHead.getComponent('playerIcon').setData({id: GLB.playerUserIds[0]});
-        this.rightHead.getComponent('playerIcon').setData({id: GLB.playerUserIds[1]});
+    setHeadInfo () {
+        this.timeNode = this.node.getChildByName('name');
+        var camps = Game.GameManager.logic.getCamps()
+        for (var index = 0; index < camps.length; index++){
+            if (camps[index].uid == Game.GameManager.uid){
+                this.leftName = this.timeNode.getChildByName('leftName'); //我方
+                this.leftName.getComponent(cc.Label).string = camps[index].name;
+                this.leftHead.getComponent('playerIcon').setData(camps[index]);
+            }else{
+                this.rightName = this.timeNode.getChildByName('rightName'); //他仿
+                this.rightName.getComponent(cc.Label).string = camps[index].name;
+                this.rightHead.getComponent('playerIcon').setData(camps[index]);
+            }
+        }
     },
+
 
     //收到发牌消息,游戏开始
     gameStart (){
@@ -245,7 +194,7 @@ cc.Class({
         this.headColorInit()
 
         //设置头像信息
-        this.setHeadIcon()
+        this.setHeadInfo()
 
         //初始化时间信息
         this.timeLabelInit()
@@ -266,4 +215,41 @@ cc.Class({
     notifyReady (){
         nano.notify("game.QiPaiFinished", {}) 
     },
+
+
+    //提示出牌 并且开始倒计时
+    onHintPlayer (){
+        console.log("onHintPlayer")
+        
+        this.showCurTurnLabel()
+        this.setTimeNumFont()
+        this.countTime()
+    },
+
+    //显示回合信息
+    showCurTurnLabel () {
+        //自己始终在左边
+        if (Game.GameManager.logic.isMyRound()) {
+            this.timeLeftNode.active = true;
+            this.timeRightNode.active = false;
+        } else {
+            this.timeLeftNode.active = false;
+            this.timeRightNode.active = true;
+        }
+    },
+
+    //聊天表情
+    onShowEnjoy (data){
+        console.log("onShowEnjoy", data) //uid index 聊天索引
+    },
+
+    //游戏结算
+    onGameEnd (data) {
+        console.log("onGameEnd", data) // winner 胜利的uid  coin  camp // 0 平局 1  2   giveup 是否放弃  timeOut 是否超时
+
+        uiFunc.openUI("uiVsResultVer", function(panel) {
+            //初始化游戏包括敌我双向 棋盘信息
+            panel.getComponent("uiVsResult").setData(data);
+        }.bind(this));
+    }
 });

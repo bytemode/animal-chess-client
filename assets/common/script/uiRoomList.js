@@ -38,6 +38,7 @@ cc.Class({
             uiFunc.openUI("uiRoomVer", function(obj) {
                 var room = obj.getComponent('uiRoom');
                 room.joinRoomInit({"roomID":data.tableInfo.deskId, "owner": data.tableInfo.creator});
+                
                 uiFunc.closeUI(this.node.name);
                 this.node.destroy();
             }.bind(this))

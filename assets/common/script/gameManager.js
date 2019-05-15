@@ -46,7 +46,7 @@ cc.Class({
     //nano init and login
     nanoInit: function(uid){
         nano.init({
-            host: "127.0.0.1",
+            host: "192.168.30.117",
             port: 3325,
             path: '/nano',
             handshakeCallback : function(){}
@@ -59,9 +59,13 @@ cc.Class({
                 GLB.userInfo.id = data.acId
                 Game.GameManager.uid = data.acId
                 Game.GameManager.nickName = data.nickname
+                Game.GameManager.headUrl = data.headUrl
                 this.lobbyShow()
             }.bind(this))
         }.bind(this));
+
+        //玩家确定准备进入
+        nano.on("onPlayerEnter", this.onPlayerEnter.bind(this))
 
         //发牌消息
         nano.on("onDuanPai", this.onDuanPai.bind(this))
@@ -72,8 +76,17 @@ cc.Class({
         //翻牌
         nano.on("onOpenPiece", this.onOpenPiece.bind(this))
 
+        //移动
+        nano.on("onMovePiece", this.onMovePiece.bind(this))
+
+        //吃牌
+        nano.on("onEatPiece", this.onEatPiece.bind(this))
+
         //牌局结束
         nano.on("onGameEnd", this.onGameEnd.bind(this))
+
+        //聊天表情
+        nano.on("onShowEnjoy", this.onShowEnjoy.bind(this))
     },
 
     //显示大厅界面
@@ -82,49 +95,64 @@ cc.Class({
         uiFunc.openUI("uiLobbyPanel");
     },
 
+    //玩家基础数据同步
+    onPlayerEnter: function(data){
+        console.log("onPlayerEnter", data)
+        this.logic.setPlayerData(data.data)//pos  uid  name isReady sex  isExit headURL  score  ip
+
+    },
+
     //开始游戏发牌
     onDuanPai: function(data) {
         console.log("onDuanPai", data)
         this.logic.initFaPai(data)
 
         //加载游戏场景
-        cc.director.loadScene('game', function() {
-            uiFunc.openUI("uiGamePanel", function(panel) {
-                //初始化游戏包括敌我双向 棋盘信息
-                panel.getComponent("uiGamePanel").gameStart();
-            }.bind(this));
+        uiFunc.openUI("uiGamePanel", function(panel) {
+            //初始化游戏包括敌我双向 棋盘信息
+            panel.getComponent("uiGamePanel").gameStart();
+            clientEvent.dispatch(clientEvent.eventType.onDuanPai, data);
         }.bind(this));
     },
 
     //提示玩家出牌
     onHintPlayer:function(data) {
-        console.log('-----onHintPlayer-----')
+        console.log('-----onHintPlayer-----', data)
+        this.logic.setRoundIndo(data)
         clientEvent.dispatch(clientEvent.eventType.onHintPlayer, data);
     },
 
     //翻牌
     onOpenPiece: function(data) {
-        console.log('-----onOpenPiece-----')
-        if(GLB.userInfo.id == data.uid) { //过滤掉自己的操作
-            return
-        }
+        console.log('-----onOpenPiece-----', data) //uid index piece
+        this.logic.setPieceByIndex(data.index, data.piece)
         clientEvent.dispatch(clientEvent.eventType.onOpenPiece, data);
     },
 
     //移动
     onMovePiece: function(data) {
-        console.log('-----onMovePiece-----')
-        if(GLB.userInfo.id == data.uid) { //过滤掉自己的操作
-            return
-        }
+        console.log('-----onMovePiece-----', data)
+        this.logic.movePiece(data.indexSrc, data.indexDest)
         clientEvent.dispatch(clientEvent.eventType.onMovePiece, data);
     },
 
     //吃牌
     onEatPiece: function(data) {
-        console.log('-----onEatPiece-----')
-        if(GLB.userInfo.id == data.uid) { //过滤掉自己的操作
+        console.log('-----onEatPiece-----', data)
+        // code 1吃 2被吃 3同归 0失败
+        if(data.code == 0 ){
             return
+        }
+
+        if(data.code == 1){
+            let srcType = this.logic.getPieceByIndex(data.indexSrc)
+            this.logic.setPieceByIndex(data.indexSrc, 0)
+            this.logic.setPieceByIndex(data.indexDest, srcType)
+        }else if(data.code == 2){
+            this.logic.setPieceByIndex(data.indexSrc, 0)
+        }else if(data.code == 3){
+            this.logic.setPieceByIndex(data.indexSrc, 0)
+            this.logic.setPieceByIndex(data.indexDest, 0)
         }
         clientEvent.dispatch(clientEvent.eventType.onEatPiece, data);
     },
