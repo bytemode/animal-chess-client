@@ -1,6 +1,6 @@
 var uiPanel = require("uiPanel");
-var mvs = require("Matchvs");
 var GLB = require("Glb");
+
 cc.Class({
     extends: uiPanel,
     properties: {
@@ -35,6 +35,7 @@ cc.Class({
 
     onDestroy() {
         clientEvent.off(clientEvent.eventType.onDuanPai, this.onDuanPai, this);
+        clientEvent.off(clientEvent.eventType.onPlayerEnter, this.joinRoomNotify, this)
     },
 
     //创建房间返回初始换房间基本信息

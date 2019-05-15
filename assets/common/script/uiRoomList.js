@@ -1,6 +1,6 @@
 var uiPanel = require("uiPanel");
-var mvs = require("Matchvs");
 var GLB = require("Glb");
+
 cc.Class({
     extends: uiPanel,
 
@@ -35,7 +35,7 @@ cc.Class({
 
             //打开房间界面
             GLB.roomId = data.tableInfo.deskId;
-            uiFunc.openUI("uiRoomVer", function(obj) {
+            uiFunc.openUI("uiRoom", function(obj) {
                 var room = obj.getComponent('uiRoom');
                 room.joinRoomInit({"roomID":data.tableInfo.deskId, "owner": data.tableInfo.creator});
                 
@@ -48,10 +48,5 @@ cc.Class({
     },
 
     onDestroy() {
-        if (window.wx) {
-            wx.offKeyboardComplete();
-            wx.offKeyboardInput();
-            wx.hideKeyboard();
-        }
     }
 });

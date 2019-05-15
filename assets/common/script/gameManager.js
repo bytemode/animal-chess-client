@@ -46,7 +46,7 @@ cc.Class({
     //nano init and login
     nanoInit: function(uid){
         nano.init({
-            host: "192.168.30.117",
+            host: "127.0.0.1",
             port: 3325,
             path: '/nano',
             handshakeCallback : function(){}
@@ -107,11 +107,12 @@ cc.Class({
         console.log("onDuanPai", data)
         this.logic.initFaPai(data)
 
+        clientEvent.dispatch(clientEvent.eventType.onDuanPai, data);
+
         //加载游戏场景
         uiFunc.openUI("uiGamePanel", function(panel) {
             //初始化游戏包括敌我双向 棋盘信息
             panel.getComponent("uiGamePanel").gameStart();
-            clientEvent.dispatch(clientEvent.eventType.onDuanPai, data);
         }.bind(this));
     },
 

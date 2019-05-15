@@ -85,7 +85,10 @@ cc.Class({
     onDestroy () {
         console.log('uiGamePanel onDestroy');
         clearInterval(this.interval);
+        clientEvent.off(clientEvent.eventType.onHintPlayer, this.onHintPlayer, this);
         clientEvent.off(clientEvent.eventType.stopTimeWarnAnim, this.stopTimeWarnAnim, this);
+        clientEvent.off(clientEvent.eventType.onShowEnjoy, this.onShowEnjoy, this);
+        clientEvent.off(clientEvent.eventType.onGameEnd, this.onGameEnd, this);
     },
 
     countTime () {

@@ -1,6 +1,6 @@
 var uiPanel = require("uiPanel");
-var mvs = require("Matchvs");
 var GLB = require("Glb");
+
 cc.Class({
     extends: uiPanel,
 
@@ -30,6 +30,10 @@ cc.Class({
             }.bind(this));
         }
         clientEvent.on(clientEvent.eventType.onDuanPai, this.onDuanPai, this);
+    },
+
+    onDestory() {
+        clientEvent.off(clientEvent.eventType.onDuanPai, this.onDuanPai, this);
     },
 
     rank: function() {
@@ -121,7 +125,7 @@ cc.Class({
     },
 
     //------------------------------------------------------------------------------------------------
-    onDuanPai: function() {
+    onDuanPai: function(data) {
         this.exit()
     },
 
@@ -142,7 +146,7 @@ cc.Class({
 
             //打开房间界面
             GLB.roomId = data.tableInfo.deskId;
-            uiFunc.openUI("uiRoomVer", function(obj) {
+            uiFunc.openUI("uiRoom", function(obj) {
                 var room = obj.getComponent('uiRoom');
                 room.createRoomInit({"roomID":data.tableInfo.deskId, "owner": data.tableInfo.creator});
             })
